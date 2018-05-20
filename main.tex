@@ -1,0 +1,82 @@
+\documentclass[10pt]{beamer}
+\usetheme{metropolis}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage{xspace}
+\usepackage{tabu}
+\usepackage{comment}
+\usepackage{tikz}
+\usepackage{epstopdf}
+\usepackage{complexity}
+\usepackage{framed}
+\usepackage{ragged2e}
+%\usepackage[usenames, dvipsnames]{color}
+%\usepackage{mathpazo}
+%\usepackage[beamer,larabove]{tex-local/settings1e}
+
+%\input{tex-local/local_macros}
+
+%\geometry{paperwidth=140mm,paperheight=105mm}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+\usepackage{xspace}
+
+
+\usetikzlibrary[positioning,arrows,scopes,calc,patterns,
+backgrounds,decorations.pathmorphing,shapes.geometric]
+
+\title{Rationality and Efficient Verifiable Computation}
+\author{Matteo Campanelli}
+
+\date{}
+
+%\institute{The City College of New York\\
+%		CUNY}
+
+
+%\keywords{Rational Proofs, Verifiable Computation}
+
+\AtBeginSubsection[]
+{
+	\begin{frame}{Outline}
+		\tableofcontents[currentsection,currentsubsection]
+	\end{frame}
+}
+
+%\includeonlyframes{label}
+
+\begin{document}
+	
+\input{mycommands.tex}
+	
+
+\frame[plain,label=title]{\titlepage}
+
+
+% == From now Old stuff from proposal ==
+%
+%\input{tex_beamer/introduction}
+%
+%\input{tex_beamer/rp-background}
+%
+%\input{tex_beamer/sequential}
+%
+%\input{tex_beamer/space-bounded}
+%
+%
+%\input{tex_beamer/fg} 
+%
+%\input{tex_beamer/conclusion}
+
+
+
+\end{document}

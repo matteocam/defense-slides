@@ -1,0 +1,656 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tex-local/settings1e}[2013/02/25 macros for crypto papers]
+
+\RequirePackage{etoolbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option Declarations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% false by default
+\newtoggle{llncs}\togglefalse{llncs}
+\newtoggle{beamer}\togglefalse{beamer}
+\newtoggle{colorlinks}\togglefalse{colorlinks}
+\newtoggle{larabove}\togglefalse{larabove}
+\newtoggle{sfabbrv}\togglefalse{sfabbrv}
+%
+\newtoggle{bigauth}\togglefalse{bigauth}
+\newtoggle{smalleralgcomments}\togglefalse{smalleralgcomments}
+\newtoggle{debug}\togglefalse{debug}
+% true by default
+\newtoggle{algo}\toggletrue{algo}
+\newtoggle{thms}\toggletrue{thms}
+\newtoggle{auth}\toggletrue{auth}
+\newtoggle{cref}\toggletrue{cref}
+\newtoggle{boldmathdesc}\toggletrue{boldmathdesc}
+\newtoggle{bullets}\toggletrue{bullets}
+%
+\newtoggle{notes}\toggletrue{notes}
+
+% off by default
+\DeclareOption{llncs}{\toggletrue{llncs}} % llncs
+\DeclareOption{beamer}{\toggletrue{beamer}} % beamer
+\DeclareOption{colorlinks}{\toggletrue{colorlinks}} % colorlinks
+\DeclareOption{larabove}{\toggletrue{larabove}} % larabove
+\DeclareOption{sfabbrv}{\toggletrue{sfabbrv}} % sfabbrv
+%
+\DeclareOption{bigauth}{\toggletrue{bigauth}} % bigauth
+\DeclareOption{smalleralgcomments}{\toggletrue{smalleralgcomments}} % smalleralgcomments
+\DeclareOption{debug}{\toggletrue{debug}} % debug
+% on by default
+\DeclareOption{noalgo}{\togglefalse{algo}} % noalgo
+\DeclareOption{nothms}{\togglefalse{thms}} % nothms
+\DeclareOption{noauth}{\togglefalse{auth}} % noauth
+\DeclareOption{nocref}{\togglefalse{cref}} % nocref
+\DeclareOption{noboldmathdesc}{\togglefalse{boldmathdesc}} % noboldmathdesc
+\DeclareOption{nobullets}{\togglefalse{bullets}} % nobullets
+%
+\DeclareOption{nonotes}{\togglefalse{notes}} % nonotes
+% pass-through options to other packages
+\DeclareOption{nthm_thmmarks}{\PassOptionsToPackage{amsmath,thmmarks}{ntheorem}}
+\DeclareOption{cref_noabbrev}{\PassOptionsToPackage{noabbrev}{cleveref}}
+\DeclareOption{cref_capitalize}{\PassOptionsToPackage{capitalize}{cleveref}}
+\DeclareOption{cref_nameinlink}{\PassOptionsToPackage{nameinlink}{cleveref}}
+
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pre Defs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% new colors
+\colorlet{myGreen}{green!60!black}
+\colorlet{myFaded}{black!40}
+\colorlet{myLinkGreen}{Green!50!LimeGreen}
+
+% new toggles
+\newtoggle{kw}\toggletrue{kw}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Option Handling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% off by default
+
+\iftoggle{llncs}{
+	\togglefalse{thms}
+	\togglefalse{auth}
+	\togglefalse{kw}
+
+	\spn@wtheorem{assumption}{Assumption}{\bfseries}{\itshape}
+	\spn@wtheorem{hypothesis}{Hypothesis}{\bfseries}{\itshape}
+	\spn@wtheorem{conject}{Conjecture}{\bfseries}{\itshape}
+	\spnewtheorem*{sketch}{Proof Sketch}{\itshape}{\rmfamily}
+}{
+	%
+}
+
+\iftoggle{beamer}{
+	\togglefalse{algo}
+	\togglefalse{thms}
+	\togglefalse{auth}
+	\togglefalse{cref}
+	\togglefalse{boldmathdesc}
+	\togglefalse{bullets}
+	\togglefalse{kw}
+	
+	\setbeamercovered{highly dynamic}
+	\setbeamertemplate{navigation symbols}{}
+
+	% Outer Theme
+	\useoutertheme[subsection=false]{smoothbars}
+	% Inner Theme (rounded)
+	\setbeamertemplate{sections/subsections in toc}[square]
+	\setbeamertemplate{items}[square]
+	\setbeamertemplate{blocks}[rounded]
+	\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+	\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
+	\setbeamertemplate{section page}[default][colsep=-4bp,rounded=true]
+	% Outer Color Theme
+	\usecolortheme{whale}
+	% Inner Color Theme
+	\usecolortheme{orchid}
+	% Font Theme
+	\usefonttheme[onlymath]{serif}
+
+	% New color alerts
+	\newenvironment{redenv}
+		{\setbeamercolor{alerted text}{fg=red}\begin{alertenv}}
+		{\end{alertenv}}
+	\newcommand<>{\red}[1]{\begin{redenv}#2#1\end{redenv}}
+
+	\newenvironment{greenenv}
+		{\setbeamercolor{alerted text}{fg=myGreen}\begin{alertenv}}
+		{\end{alertenv}}
+	\newcommand<>{\green}[1]{\begin{greenenv}#2#1\end{greenenv}}
+
+	\newenvironment{blueenv}
+		{\setbeamercolor{alerted text}{fg=blue}\begin{alertenv}}
+		{\end{alertenv}}
+	\newcommand<>{\blue}[1]{\begin{blueenv}#2#1\end{blueenv}}
+
+	% New dual color alerts %
+	\newenvironment{redgrayenv}
+		{\begin{dualcoloralert}{red}{myFaded}}
+		{\end{dualcoloralert}}
+	\newcommand<>{\redgray}[1]{\begin{redgrayenv}#2#1\end{redgrayenv}}
+
+	\newenvironment{greengrayenv}
+		{\begin{dualcoloralert}{myGreen}{myFaded}}
+		{\end{dualcoloralert}}
+	\newcommand<>{\greengray}[1]{\begin{greengrayenv}#2#1\end{greengrayenv}}
+
+	\newenvironment{bluegrayenv}
+		{\begin{dualcoloralert}{blue}{myFaded}}
+		{\end{dualcoloralert}}
+	\newcommand<>{\bluegray}[1]{\begin{bluegrayenv}#2#1\end{bluegrayenv}}
+
+	\newenvironment{dualcoloralert}[2]
+		{\begin{altenv}
+			{\setbeamercolor{alerted text}{fg=#1}
+				\usebeamertemplate{alerted text begin}
+				\usebeamercolor[fg]{alerted text}
+				\usebeamerfont{alerted text}}
+			{\usebeamertemplate{alerted text end}}
+			{\setbeamercolor{alerted text}{fg=#2}
+				\usebeamertemplate{alerted text begin}
+				\usebeamercolor[fg]{alerted text}
+				\usebeamerfont{alerted text}}
+			{\usebeamertemplate{alerted text end}}}
+		{\end{altenv}}
+}{
+	%
+}
+
+\iftoggle{colorlinks}{
+	\hypersetup{
+		colorlinks,
+		linkcolor=Crimson,
+		citecolor=myLinkGreen,
+		filecolor=HotPink,
+		urlcolor=RoyalBlue}
+}{
+	%
+}
+
+\iftoggle{larabove}{
+	\newcommand{\lar}{\lara}
+}{
+	\newcommand{\lar}{\larb}
+}
+
+\iftoggle{sfabbrv}{
+	\newcommand{\textabbrv}[1]{\textsf{#1}}
+}{
+	\newcommand{\textabbrv}[1]{\textrm{#1}}
+}
+
+%% on by default
+
+\iftoggle{algo}{
+	% New Keywords
+	\SetKwInput{Func}{Function}
+	\SetKwInput{Proc}{Procedure}
+	\SetKwInput{Alg}{Algorithm}
+
+	% New Comment Style
+	\SetKwComment{Comment}{$\triangleright$ }{}
+
+	% New Macros
+	\newcommand{\Parse}[2]{\KwSty{parse} #1 \KwSty{as} #2}
+
+	% Fonts
+	\newcommand{\algofont}{\small}
+	\SetAlCapFnt{\algofont}
+	\SetAlCapNameFnt{\algofont}
+	\SetProcFnt{\algofont}
+	\SetProcNameFnt{\algofont}
+	\SetProcArgFnt{\algofont}
+	\SetAlFnt{\algofont}
+	%
+	\iftoggle{smalleralgcomments}{
+		\newcommand{\myCommentFnt}[1]{{\footnotesize#1}}
+		\SetCommentSty{myCommentFnt}
+	}{
+		\SetCommentSty{textnormal}
+	}
+	\SetFuncSty{textsf}
+
+	% Settings
+	\DontPrintSemicolon
+
+	% Environment for breakable algorithms
+	\newlist{enumeratealg}{enumerate}{1}
+	\setlist[enumeratealg]{label=\arabic*,
+		font=\relsize{-2}\normalfont\bfseries,
+		nosep,leftmargin=\parindent+\leftskip}
+}{
+	%
+}
+
+\iftoggle{thms}{
+	\RequirePackage[hyperref]{ntheorem}
+
+	\theoremstyle{plain}
+	\theoremseparator{:}
+	\theoremheaderfont{\normalfont\bfseries}
+	\theorembodyfont{\normalfont\itshape}
+	\theoremsymbol{\ensuremath{\square}}
+	%
+	\newtheorem{theorem}{Theorem}[section]
+	\newtheorem{lemma}[theorem]{Lemma}
+	\newtheorem{proposition}[theorem]{Proposition}
+	\newtheorem{corollary}[theorem]{Corollary}
+
+	\theorembodyfont{\normalfont}
+	\theoremsymbol{\ensuremath{\lozenge}}
+	%
+	\newtheorem{definition}[theorem]{Definition}
+	\newtheorem{assumption}[theorem]{Assumption}
+	\newtheorem{hypothesis}[theorem]{Hypothesis}
+	\newtheorem{conject}[theorem]{Conjecture}
+
+	\theoremseparator{.}
+	\theoremheaderfont{\normalfont\itshape}
+	\theoremsymbol{}
+	%
+	\newtheorem{remark}{Remark}[section]
+	\newtheorem{note}[remark]{Note}
+	%
+	\newtheorem{exercise}{Exercise}[section]
+	\newtheorem{solution}{Solution}[section]
+
+	\theoremstyle{nonumberplain}
+	%
+	\newtheorem{claim}{Claim}
+
+	\theoremsymbol{\ensuremath{\blacksquare}}
+	%
+	\newtheorem{proof}{Proof}
+	\newtheorem{sketch}{Proof Sketch}
+}{
+	%
+}
+
+\iftoggle{auth}{
+	\RequirePackage{authblk}
+
+	\iftoggle{bigauth}{
+		\renewcommand{\Authfont}{\large}
+		\renewcommand{\Affilfont}{\normalsize}
+	}{
+		\renewcommand{\Authfont}{\normalsize}
+		\renewcommand{\Affilfont}{\footnotesize}
+	}
+}{
+	%
+}
+
+\iftoggle{cref}{
+	\RequirePackage{cleveref}
+	
+	\Crefname{assumption}{Assumption}{Assumptions}
+	\Crefname{hypothesis}{Hypothesis}{Hypotheses}
+	\Crefname{conject}{Conjecture}{Conjectures}
+	\Crefname{exercise}{Exercise}{Exercises}
+	\Crefname{solution}{Solution}{Solutions}
+	% Fix for the algorithm2e line references
+	\newcommand{\Lref}[1]{Line~\ref{#1}}
+	\newcommand{\LLref}[1]{Lines~\ref{#1}}
+	\newcommand{\Lrefrange}[2]{\LLref{#1}--\ref{#2}}
+	\newcommand{\lrefrange}[2]{\llref{#1}--\ref{#2}}
+
+	\if@cref@capitalise
+		\crefname{assumption}{Assumption}{Assumptions}
+		\crefname{hypothesis}{Hypothesis}{Hypotheses}
+		\crefname{conject}{Conjecture}{Conjectures}
+		\crefname{exercise}{Exercise}{Exercises}
+		\crefname{solution}{Solution}{Solutions}
+			% Fix for the algorithm2e line references
+		\newcommand{\lref}[1]{Line~\ref{#1}}
+		\newcommand{\llref}[1]{Lines~\ref{#1}}
+		\if@cref@abbrev
+			\crefname{section}{Sect.}{Sects.}
+			\crefname{appendix}{App.}{Apps.}
+		\else
+			%
+		\fi
+	\else
+		\crefname{assumption}{assumption}{assumptions}
+		\crefname{hypothesis}{hypothesis}{hypotheses}
+		\crefname{conject}{conjecture}{conjectures}
+		\crefname{exercise}{exercise}{exercises}
+		\crefname{solution}{solution}{solutions}
+			% Fix for the algorithm2e line references
+		\newcommand{\lref}[1]{line~\ref{#1}}
+		\newcommand{\llref}[1]{lines~\ref{#1}}
+		\if@cref@abbrev
+			\crefname{section}{sect.}{sects.}
+			\crefname{appendix}{app.}{apps.}
+		\else
+			%
+		\fi
+	\fi
+}{
+	%
+}
+
+\iftoggle{boldmathdesc}{
+	\setlist[description]{font=\normalfont\bfseries\boldmath}
+}{
+	%
+}
+
+\iftoggle{bullets}{
+	\setlist[itemize,1]{label=$\bullet$}
+	\setlist[itemize,2]{label=$\diamond$}
+	\setlist[itemize,3]{label=$\star$}
+	\setlist[itemize,4]{label=$\cdot$}
+}{
+	%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Function and Environment Defs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Comments - Printed
+\newcommand{\nnote}[1]{\iftoggle{notes}{{\color{PaleVioletRed}#1}}{}}
+\newcommand{\mnote}[1]{\iftoggle{notes}{{\color{RoyalBlue}#1}}{}}
+\newcommand{\snote}[1]{\iftoggle{notes}{\marginpar{#1}}{}}
+%
+\newcommand{\hnote}[1]{\iftoggle{notes}{{\color{DarkOrange}#1}}{#1}}
+
+% Comments - In Source
+\newcommand{\ignore}[1]{}
+
+% My Paragraph
+\newcommand{\mypar}[1]{\medskip \noindent {\scshape#1.}}
+\newcommand{\myparT}[1]{\noindent {\scshape#1.}}
+% My subsub
+\newcommand{\mysubsub}[1]
+	{\medskip \noindent {\bfseries\iftoggle{llncs}{\boldmath}{}#1.}}
+\newcommand{\mysubsubT}[1]
+	{\noindent {\bfseries\iftoggle{llncs}{\boldmath}{}#1.}}
+
+% Keywords command
+\iftoggle{kw}{
+	\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+		\noindent{\bf Keywords:}\enspace\ignorespaces#1}
+}{
+	%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Text Defs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\vs}{vs.\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\cf}{cf.\xspace}
+\newcommand{\etc}{etc.\xspace}
+\newcommand{\etal}{et al.\xspace}
+\newcommand{\aka}{a.k.a.\xspace}
+%
+\newcommand{\blank}{\underline{~~}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math Defs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Letters
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\csp}{\mathcal{CSP}}
+\newcommand{\msp}{\mathcal{MSP}}
+%
+\newcommand{\zz}{\mathbb{Z}}
+\newcommand{\zzn}{\mathbb{Z}/n\mathbb{Z}}
+\newcommand{\nn}{\mathbb{N}}
+\newcommand{\rr}{\mathbb{R}}
+\newcommand{\qq}{\mathbb{Q}}
+\newcommand{\cc}{\mathbb{C}}
+\newcommand{\ff}{\mathbb{F}}
+\newcommand{\grp}{\mathbb{G}}
+
+% Operators
+\DeclareMathOperator{\poly}{\mathrm{poly}}
+\DeclareMathOperator{\negl}{\mathrm{negl}}
+\DeclareMathOperator{\bigO}{\mathcal{O}}
+
+% Commands
+\DeclarePairedDelimiter\prt{(}{)}
+\DeclarePairedDelimiter\set{\{}{\}}
+\DeclarePairedDelimiter\brk{[}{]}
+\DeclarePairedDelimiter\vct{\langle}{\rangle}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\abs{|}{|}
+\DeclarePairedDelimiter\norm{\|}{\|}
+\newcommand{\ivar}[3][1]{#2_{#1},\dots,#2_{#3}}
+\newcommand{\iop}[4][1]{#2_{#1} #4 \dots #4 #2_{#3}}
+%
+\newcommand{\bit}{\{0,1\}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\la}{\leftarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\xor}{\oplus}
+\newcommand{\nin}{\not\in}
+\newcommand{\eqdef}{\coloneqq}
+\newcommand{\eqtest}{
+	\tikz[baseline,execute at end picture={
+		\begin{pgfonlayer}{background}
+			\iftoggle{debug}{
+				\path[fill=myFaded]
+					(current bounding box.south west) rectangle
+					(current bounding box.north east);}
+			{}
+		\end{pgfonlayer}}]{
+		\path[use as bounding box] node[anchor=base,text=white] {$\overset{.}{=}$};
+		\node[anchor=base] (obj) {$=$};
+		\draw let \p1 = ($(obj.east)-(obj.west)$),
+							\p2 = ($(obj.north)-(obj.south)$) in
+					($(obj.north)+(0,-\y2/20)$) node {\relsize{-3}$\boldsymbol{?}$};
+	}
+}
+\newcommand{\lara}{
+	\tikz[baseline,execute at end picture={
+		\begin{pgfonlayer}{background}
+			\iftoggle{debug}{
+				\path[fill=myFaded]
+					(current bounding box.south west) rectangle
+					(current bounding box.north east);}
+			{}
+		\end{pgfonlayer}}]{
+		\path[use as bounding box] node[anchor=base,text=white] {$\overset{.}{\la}$};
+		\node[anchor=base] (obj) {$\leftarrow$};
+		\draw let \p1 = ($(obj.east)-(obj.west)$),
+							\p2 = ($(obj.north)-(obj.south)$) in
+					($(obj.north)+(\x1/18,-\y2/12)$) node {\relsize{-2}$\$$};
+	}
+}
+\newcommand{\larb}{
+	\tikz[baseline,execute at end picture={
+		\begin{pgfonlayer}{background}
+			\iftoggle{debug}{
+				\path[fill=myFaded]
+					(current bounding box.south west) rectangle
+					(current bounding box.north east);}
+			{}
+		\end{pgfonlayer}}]{
+		\node[anchor=base] (obj) {$\leftarrow$};
+		\draw let \p1 = ($(obj.east)-(obj.west)$),
+							\p2 = ($(obj.north)-(obj.south)$) in
+					($(obj.east)+(-\x1/10,\y2/15)$) node {\relsize{-2}$\$$};
+	}
+}
+
+% Text/Math Commands
+\makeatletter
+\newrobustcmd*{\bigo}{\@ifstar{\bigostar}{\bigonostar}}
+\newrobustcmd*{\bigostar}[1]{\ensuremath{\bigO\prt*{#1}}\xspace}
+\newrobustcmd*{\bigonostar}[2][]{\ensuremath{\bigO\prt[#1]{#2}}\xspace}
+\makeatother
+\newcommand{\true}{\ensuremath{\mathsf{True}}\xspace}
+\newcommand{\false}{\ensuremath{\mathsf{False}}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Crypto Defs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Text/Math
+
+% General
+\newcommand{\adv}{\ensuremath{\mathsf{Adv}}\xspace}
+
+% Functions
+\newcommand{\dhf}{\ensuremath{\operatorname{\mathsf{dh}}}\xspace}
+\newcommand{\dhp}{\ensuremath{\operatorname{\mathsf{dhp}}}\xspace}
+\newcommand{\tdhf}{\ensuremath{\operatorname{\mathsf{2dh}}}\xspace}
+\newcommand{\tdhp}{\ensuremath{\operatorname{\mathsf{2dhp}}}\xspace}
+
+% Algorithms
+\newcommand{\setup}{\ensuremath{\mathsf{Setup}}\xspace}
+\newcommand{\setcom}{\ensuremath{\mathsf{SetupCom}}\xspace}
+\newcommand{\init}{\ensuremath{\mathsf{Init}}\xspace}
+\newcommand{\gen}{\ensuremath{\mathsf{Gen}}\xspace}
+%
+\newcommand{\keygen}{\ensuremath{\mathsf{KeyGen}}\xspace}
+\newcommand{\extract}{\ensuremath{\mathsf{Extract}}\xspace}
+\newcommand{\ext}{\ensuremath{\mathsf{Ext}}\xspace}
+%
+\newcommand{\delegate}{\ensuremath{\mathsf{Delegate}}\xspace}
+%
+\newcommand{\encrypt}{\ensuremath{\mathsf{Encrypt}}\xspace}
+\newcommand{\enc}{\ensuremath{\mathsf{Enc}}\xspace}
+\newcommand{\encode}{\ensuremath{\mathsf{Encode}}\xspace}
+%
+\newcommand{\decrypt}{\ensuremath{\mathsf{Decrypt}}\xspace}
+\newcommand{\dec}{\ensuremath{\mathsf{Dec}}\xspace}
+\newcommand{\decode}{\ensuremath{\mathsf{Decode}}\xspace}
+%
+\newcommand{\sign}{\ensuremath{\mathsf{Sign}}\xspace}
+\newcommand{\verify}{\ensuremath{\mathsf{Vrfy}}\xspace}
+\newcommand{\commit}{\ensuremath{\mathsf{Commit}}\xspace}
+\newcommand{\open}{\ensuremath{\mathsf{Open}}\xspace}
+
+% Parameters
+\newcommand{\pk}{\ensuremath{\mathsf{PK}}\xspace}
+\newcommand{\msk}{\ensuremath{\mathsf{MSK}}\xspace}
+\newcommand{\mpk}{\ensuremath{\mathsf{MPK}}\xspace}
+\newcommand{\vk}{\ensuremath{\mathsf{VK}}\xspace}
+\newcommand{\sk}{\ensuremath{\mathsf{SK}}\xspace}
+\newcommand{\idm}{\ensuremath{\mathsf{ID}}\xspace}
+\newcommand{\hidm}{\ensuremath{\mathsf{HID}}\xspace}
+\newcommand{\com}{\ensuremath{\mathsf{com}}\xspace}
+\newcommand{\decom}{\ensuremath{\mathsf{decom}}\xspace}
+
+%% Text
+
+% General
+\newcommand{\owf}{\textabbrv{OWF}\xspace}
+\newcommand{\owp}{\textabbrv{OWP}\xspace}
+\newcommand{\prg}{\textabbrv{PRG}\xspace}
+\newcommand{\vprg}{\textabbrv{vPRG}\xspace}
+\newcommand{\prf}{\textabbrv{PRF}\xspace}
+\newcommand{\prp}{\textabbrv{PRP}\xspace}
+\newcommand{\crhf}{\textabbrv{CRHF}\xspace}
+\newcommand{\uowhf}{\textabbrv{UOWHF}\xspace}
+\newcommand{\idt}{\ensuremath{\textabbrv{ID}}\xspace}
+\newcommand{\hidt}{\ensuremath{\textabbrv{HID}}\xspace}
+%
+\newcommand{\dl}{\textabbrv{DL}\xspace}
+\newcommand{\ddh}{\textabbrv{DDH}\xspace}
+\newcommand{\cdh}{\textabbrv{CDH}\xspace}
+\newcommand{\tdh}{\textabbrv{2DH}\xspace}
+\newcommand{\stdh}{\textabbrv{s2DH}\xspace}
+
+% Security Games
+\newcommand{\cpa}{\textabbrv{CPA}\xspace}
+\newcommand{\cha}{\textabbrv{CHA}\xspace}
+\newcommand{\pdr}{\textabbrv{PDR}\xspace}
+\newcommand{\cca}{\textabbrv{CCA}\xspace}
+\newcommand{\rcca}{\textabbrv{RCCA}\xspace}
+%
+\newcommand{\ppt}{\textabbrv{PPT}\xspace}
+\newcommand{\ind}{\textabbrv{IND}\xspace}
+\newcommand{\indr}{\textabbrv{IND}\$\xspace}
+
+% Crypto Models
+\newcommand{\prc}{with pseudorandom ciphertexts}
+\newcommand{\Prc}{with Pseudorandom Ciphertexts}
+\newcommand{\rom}{\textabbrv{ROM}\xspace}
+%
+\renewcommand{\ss}{\textabbrv{SS}\xspace}
+\newcommand{\pke}{\textabbrv{PKE}\xspace}
+\newcommand{\pre}{\textabbrv{PRE}\xspace}
+\newcommand{\hibes}{\textabbrv{(H)IBE}\xspace}
+\newcommand{\ahibes}{\textabbrv{A(H)IBE}\xspace}
+%
+\newcommand{\ibe}{\textabbrv{IBE}\xspace}
+\newcommand{\longibe}{identity-based encryption\xspace}
+\newcommand{\Longibe}{Identity-Based Encryption\xspace}
+%
+\newcommand{\iber}{\textabbrv{IBE}\$\xspace}
+\newcommand{\longiber}{identity-based encryption \prc\xspace}
+\newcommand{\Longiber}{Identity-Based Encryption \prc\xspace}
+\newcommand{\LongibeR}{Identity-Based Encryption \Prc\xspace}
+%
+\newcommand{\hibe}{\textabbrv{HIBE}\xspace}
+\newcommand{\longhibe}{hierarchical identity-based encryption\xspace}
+\newcommand{\Longhibe}{Hierarchical Identity-Based Encryption\xspace}
+%
+\newcommand{\hiber}{\textabbrv{HIBE}\$\xspace}
+\newcommand{\longhiber}{hierarchical identity-based encryption \prc\xspace}
+\newcommand{\Longhiber}{Hierarchical Identity-Based Encryption \prc\xspace}
+\newcommand{\LonghibeR}{Hierarchical Identity-Based Encryption \Prc\xspace}
+%
+\newcommand{\aibe}{\textabbrv{AIBE}\xspace}
+\newcommand{\longaibe}{anonymous identity-based encryption\xspace}
+\newcommand{\Longaibe}{Anonymous Identity-Based Encryption\xspace}
+%
+\newcommand{\aiber}{\textabbrv{AIBE}\$\xspace}
+\newcommand{\longaiber}{anonymous identity-based encryption \prc\xspace}
+\newcommand{\Longaiber}{Anonymous Identity-Based Encryption \prc\xspace}
+\newcommand{\LongaibeR}{Anonymous Identity-Based Encryption \Prc\xspace}
+%
+\newcommand{\ahibe}{\textabbrv{AHIBE}\xspace}
+\newcommand{\longahibe}{anonymous hierarchical identity-based encryption\xspace}
+\newcommand{\Longahibe}{Anonymous Hierarchical Identity-Based Encryption\xspace}
+%
+\newcommand{\ahiber}{\textabbrv{AHIBE}\$\xspace}
+\newcommand{\longahiber}{anonymous hierarchical identity-based encryption \prc\xspace}
+\newcommand{\Longahiber}{Anonymous Hierarchical Identity-Based Encryption \prc\xspace}
+\newcommand{\LongahibeR}{Anonymous Hierarchical Identity-Based Encryption \Prc\xspace}
+%
+\newcommand{\be}{\textabbrv{BE}\xspace}
+\newcommand{\longbe}{broadcast encryption\xspace}
+\newcommand{\Longbe}{Broadcast Encryption\xspace}
+%
+\newcommand{\anobe}{\textabbrv{AnoBE}\xspace}
+\newcommand{\longanobe}{anonymous broadcast encryption\xspace}
+\newcommand{\Longanobe}{Anonymous Broadcast Encryption\xspace}
+%
+\newcommand{\anober}{\textabbrv{AnoBE}\$\xspace}
+\newcommand{\longanober}{anonymous broadcast encryption \prc\xspace}
+\newcommand{\Longanober}{Anonymous Broadcast Encryption \prc\xspace}
+\newcommand{\LonganobeR}{Anonymous Broadcast Encryption \Prc\xspace}
+%
+\newcommand{\oabe}{\textabbrv{oABE}\xspace}
+\newcommand{\longoabe}{outsider-anonymous broadcast encryption\xspace}
+\newcommand{\Longoabe}{Outsider-Anonymous Broadcast Encryption\xspace}
+%
+\newcommand{\oaber}{\textabbrv{oABE}\$\xspace}
+\newcommand{\longoaber}{outsider-anonymous broadcast encryption \prc\xspace}
+\newcommand{\Longoaber}{Outsider-Anonymous Broadcast Encryption \prc\xspace}
+\newcommand{\LongoabeR}{Outsider-Anonymous Broadcast Encryption \Prc\xspace}
+%
+\newcommand{\bs}{\textabbrv{BS}\xspace}
+\newcommand{\longbs}{broadcast steganography\xspace}
+\newcommand{\Longbs}{Broadcast Steganography\xspace}

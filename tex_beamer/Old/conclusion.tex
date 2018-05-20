@@ -1,0 +1,90 @@
+\begin{frame}{This Talk}
+	\begin{itemize}[<+- | alert@+>]	
+	\item A critique of the model of rational proofs for multiple delegations;
+	\item A framework for multiple delegations (sequential composability);
+	\item Sequentially composable protocols for $\log$-depth arithmetic circuits and space-bounded computations.
+	\item Verification schemes secure against $\NC^1$ adversaries. (in progress)
+	\end{itemize}
+\end{frame}
+ % TODO: add open problems, comparison with related work
+
+\begin{frame}{Additional Results}
+\begin{itemize}[<+- | alert@+>]
+	\item Lower Bounds for Rational Proofs for $\P$ and $\NP$
+	\item Composition Theorem for Rational Proofs
+	\item Rational Proofs for Randomized Computations
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Further Applications}
+	\begin{itemize}[<+- | alert@+>]
+		\item 	Cheap verification of smart contracts
+		\begin{itemize}
+			\item Something similar done in Ethereum (TrueBit).
+		\end{itemize}
+		\item Trusted computation with untrusted hardware components.
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Rational Model vs Traditional Approaches}
+	\begin{block}{What do we gain by assuming rationality?}
+		\begin{itemize}[<+- | alert@+>]
+			\item Efficiency
+			\begin{itemize}
+				\item Sublinear verification! (rational proofs)
+				\item Low communication (also sublinear). (rational proofs)
+			\end{itemize}
+			\item Simplicity
+			\item Minimal Assumptions
+%			\begin{itemize}
+%				\item These results hold even if OWFs do not exist
+%				\item (\textit{Out of scope:} approaches using rationality+crypto )
+%			\end{itemize}
+		\end{itemize}
+	\end{block}
+	
+%	\pause
+%	% - The gains: efficiency, simplicity, lack of crypto
+%	\begin{block}{Contrast with information-theoretic schemes:}
+%		\begin{itemize}[<+- | alert@+>]
+%			\item Comparable communication and worker's overhead (e.g [GKR08] vs [GHR16,\textbf{C}G15]; [RRR16] vs [\textbf{C}G17])
+%			\item Verification is at least linear in information-theoretic setting.
+%		\end{itemize}
+%	\end{block}
+\end{frame}
+
+
+
+
+\begin{frame}{Open Problems}
+	\textbf{On Rational Proofs:}
+	\begin{itemize}[<+- |  alert@+>]
+		\item Rational proofs for $\P$ and $\NP$
+		\item validating the model of rational proofs in the real world (How?)
+		\item better parameters for the budget for rational proofs 
+		% \item right now, the only parameter we use is n and we only require the budget to be poly(n). It'd be great to have a specific budget
+		%		 parameter \beta, on the lines of the security parameter in crypto.
+		\item enforcing cost assumptions (with randomized encodings or other approaches)
+		%		\item further applications of FG schemes to sequentially composable rational proofs
+		%		 \item e.g. can one get a compiler from a stand alone rational scheme to a sequentially composable one having
+	\end{itemize}
+	\onslide<+->{
+		\textbf{On crypto against limited adversaries:}
+		\begin{itemize}[<+- |  alert@+>]
+			%\item pushing further on the partial results we have
+			\item Other interesting crypto obtainable from $\L \neq \NC^1$ in a fine-grained model?
+			\begin{itemize}
+				\item Obfuscation? ABE? FE?
+			\end{itemize}
+			\item All the questions above, but with adversaries of \textit{bounded size} (instead of bounded depth)
+			%\item FG primitives in the model of size as first step
+		\end{itemize}
+	}
+	
+\end{frame}
+
+\begin{frame}{}
+	\Large Fin.
+\end{frame}

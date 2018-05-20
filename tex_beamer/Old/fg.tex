@@ -1,0 +1,52 @@
+\section{Work in Progress}
+
+
+\begin{frame}{Verifiable Computation Against Limited Adversaries}
+	\textbf{Gist of the idea:} schemes where cheating costs more than being honest.
+	\onslide<+->
+	
+	\begin{block}{Theorem}
+		Consider a delegation protocol for $f$ where:
+		\begin{itemize}
+			\item the honest prover pays $C^*$;
+			\item for any cheating provers investing $\tilde{C} < C^*$ the probability of being found out is \textit{overwhelming} (e.g. $1-2^{-n}$).
+		\end{itemize}
+		Then this protocol yields a sequentially composable rational proof for $f$.
+	\end{block}
+	\pause
+	\begin{block}{Proof}
+		
+		\begin{itemize}[<+- | alert@+>]	
+			\item Pay a prover $R^*$ if the protocol accepts and 0 otherwise;
+			\item \textit{Any} ``lazy'' cheating worker will obtain a negligible reward;
+			\item Therefore the work that worker is saving cannot compensate how much reward it is giving up.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Our Result in Progress}
+\begin{block}{}
+	\label{res:delegation}
+	If $L \not = \NC^1$, there exists a \textit{non-interactive} delegation scheme:
+	\begin{itemize}[<+- | alert@+>]	
+		\item for computations in $\NC^1$,
+		\item secure against adversaries in $\NC^1$,
+		\item where the delegator is a constant-depth circuit (w/ unbounded fan-in),
+		\item and both the input and output remain private to the delegator.
+	\end{itemize} 
+\end{block}
+\end{frame}
+
+\begin{frame}{Techniques}
+	 \textbf{Main Idea:} Exploits techniques based on homomorphic encryption for delegation of computation [CKV10]
+		\begin{itemize}[<+- | alert@+>]	
+			\item We take a PKE scheme secure against $\NC^1$ adversaries and make it (somewhat) homomorphic within $\NC1$
+			\item We use relinearization techniques from [BV13] and show they can be used for low-depth circuits;
+			\item We observe that the reductions in [CKV10] can be carried out by circuits of low depth.
+			\item We use other (standard) techniques for depth reduction of circuits to increase expressivity of the resulting scheme.
+		\end{itemize} 
+
+\end{frame}
+
+% ...
+

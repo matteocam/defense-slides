@@ -1,0 +1,84 @@
+
+\begin{frame}{Verifiable Computation}
+	
+		% what it is \begin{frame}{Motivation: Outsourcing Computation}
+		\begin{block}{The Context}
+			A \textit{delegator} requests a \textit{worker} to compute a function $f$ on input $x$.
+		\end{block}
+		\onslide<+->
+		\begin{itemize}[<+- | alert@+>]
+			\item Large scale distributed computation (e.g. volunteer computation, SETI@home,\dots)
+			\item Cloud computing.
+			\item Weak peripheral devices.
+		\end{itemize}
+		
+		\onslide<+->
+		\center{\Large{\textbf{The Main Problem of Verifiable Computation:}}\\
+			\onslide<+-> \large{Building protocols to handle untrusted workers.}}
+
+		% Motivation	
+\end{frame}
+%
+\begin{frame}{Rational Model}
+	\begin{block}{Assumption: }
+		Workers have incentives and will act to maximize their utility.
+	\end{block}
+	\pause
+\begin{block}{Incentives in Outsourced Computation:}
+	\begin{itemize}[<+- | alert@+>]
+		\item \textbf{e.g.} payments for computations on the cloud; % XXX: who applies this model?
+		\item \textbf{e.g.} 'rewarded' volunteer computation (e.g. SETI@HOME and GridCoin);
+		\item \textbf{e.g.} reward for mining in cryptocurrencies.
+	\end{itemize}
+\end{block}
+\onslide<+->
+\begin{block}{Abstracting incentives:}
+\begin{itemize}[<+- | alert@+>]
+	\item utility $ = $  payment (\textit{reward}) the worker gets;
+	\small{
+		\begin{itemize}
+			\item (More realistically) utility $ = $ reward $ - $ cost (\textit{profit}).
+			\item But we will temporarily ignore costs.
+		\end{itemize}}
+	\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Approach: ``Correct Result $\iff$ Highest Pay'' [BCEJKL08]}
+	\onslide<+->
+	\begin{block}{\Large{To achieve}}
+		\center{\Large{protocols ``secure'' against rational adversaries...}}
+	\end{block}
+	
+	\medskip
+	\pause
+	\begin{block}{\Large{we  make sure that}}
+		\center{\Large{we pay less for an incorrect result.}}
+% \pause \Large{\textbf{$\Leftarrow$ New goal.}}}
+	\end{block}
+	\pause
+	\alert{(All this, in expectation)}.
+	
+\end{frame}
+
+\begin{frame}{Design Goals in This work}
+\begin{itemize}[<+- | alert@+>]
+	\item Efficiency (especially for verification);
+	\item Minimal (or no) complexity assumptions.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{This Proposal: A Roadmap}
+	\begin{enumerate}[<+- | alert@+>]
+		\item An overview of rational proofs [AM12];
+		\item Our results:
+		\begin{enumerate}
+			\item A critique of rational proofs: delegating multiple inputs; [\textbf{C}G15]
+			\item Protocols for delegating space-bounded computations; [\textbf{C}G17]
+		\end{enumerate}
+		\item Results in progress: alternative approaches to rational proofs.
+		\item Comparison, further applications, open problems.
+	\end{enumerate}
+\end{frame}
+
