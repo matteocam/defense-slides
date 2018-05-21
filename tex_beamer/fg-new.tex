@@ -1,0 +1,111 @@
+% == FG VC => Seq Comp ==
+\begin{frame}{Fine-Grained VC $\implies$ Sequentially Composable Rational Proofs}
+\end{frame}
+
+% == Our main result: FG VC against NC1 adversaries from minimal assumptions ==
+\begin{frame}{Our result for fine-grained VC}
+	TODO: Say about result and assumption
+\end{frame}
+
+% == Additional properties ==
+\begin{frame}{Properties of our VC scheme}
+\end{frame}
+
+% == How to obtain this VC: HE + transformation ==
+% Say here that another result will be for HE
+\begin{frame}{How to Obtain Fine-Grained VC}
+	Core of our approach is \cite{ckv10}:
+	\begin{itemize}
+		\item  Obtains VC from Homomorphic Encryption (HE)
+	\end{itemize}
+\end{frame}
+
+\def\E{\func{E}}
+
+% == Homomorphic Encryption ==
+\begin{frame}{Homomorphic Encryption (HE)}
+	\begin{center} \textbf{HE = PKE + Evaluation Function} \end{center}
+	\begin{enumerate}
+		\item $\func{KeyGen} \to (\pk, \sk)$
+		\item $\func{Enc}_{\pk}(x) \to \E(x)$
+		\item $\func{Dec}_{\sk}(\E(x)) \to x$
+		\pause  
+		\item $\func{Eval}_{\pk}(f, \E(x)) \to \E(f(x))$
+	\end{enumerate}
+	\pause
+	
+	\begin{result}[HE against $\NC^1$ adversaries]
+		TODO
+	\end{result}
+\end{frame}
+
+% == VC from HE ==
+\begin{frame}{VC from HE (\cite{ckv10})}
+	TODO: Intuition of ckv10
+	\begin{itemize}
+		\item 
+	\end{itemize}
+	\pause
+	\textbf{Enhancements:}
+	\begin{itemize}
+		% TODO: Improve graphics so that changes are clear
+		\item \textbf{To amplify error:} use random permutation
+		\item \textbf{To make reusable:} use HE  on top of construction.
+	\end{itemize}
+	% Scaling this up: error amplification (permutation); reusability
+\end{frame}
+
+% == VC from HE in low depth ==
+\begin{frame}{VC from HE in low-depth}
+	\textbf{Recall:} all our algorithms should run in $\NC^1$ and our verifier should be efficient.
+	
+	\textbf{Challenges: }
+	\begin{itemize}
+		\item Can we sample a random permutation in low-depth?
+		\item We use ``double'' HE: $\function{Eval}(\function{Eval}(f, \cdot), c)$ stay in $\NC^1$?
+		\item How to make sure it works when HE has \item{randomized} decryption? (our decryption is randomized, but the original construction only works for deterministic)
+		\item In the proof, does the security reduction stay in $\NC^1$?
+	\end{itemize}
+\end{frame}
+
+% == HE against NC1 circuits==
+\begin{frame}{HE against NC1 circuits}
+	Our result: [TODO: restating our result]
+	
+	\textbf{Our approach:}
+	\begin{itemize}
+		\item We start from the PKE secure against $\NC^1$ in \cite{fgcrypto};
+		\item We apply relinearization techniques from \cite{fhe-lwe} to obtain HE;
+		\begin{itemize}
+			\item Can homomorphically evaluate polynomials of constant degree; 
+		\end{itemize}
+		\item We extend the class of functions we can evaluate homomorphically through degree reduction techniques from \cite{razborov1987lower}.
+	\end{itemize}
+\end{frame}
+
+% == Description of DVV16 ==
+\begin{frame}{PKE scheme from \cite{fgcrypto}}
+	\begin{itemize}
+		\item $\PKEKeygen_{\sk}(\unlambda):$
+		\begin{enumerate}
+			\item Sample $(\M, \k) \gets \KSample(\unlambda)$;\\
+			 {\color{red}(Property: if $\r$ random, $\transp{\r}  \M$ ``looks'' random to $\NC^1$ circuit)}
+			\item Output $(\pk = \M, \sk = \k)$.
+		\end{enumerate}
+		\item $\PKEEnc_{\pk}(\mu):$
+		\begin{enumerate}
+			\item Sample $\r \leftarrow_{\$} \bit^{\lambda}$;
+			\item Let $\transp{t} = (0 \ \dots 0 \ 1) \in \bit^{\lambda}$;
+			\item Output $\transp{\c} = \transp{\r}  \M + \mu\transp{\t}$.
+		\end{enumerate}
+		\item $\PKEDec_{\sk}(\c):$
+		\begin{enumerate}
+			\item Output $\inprod{\k}{\c}$
+		\end{enumerate}
+		
+	\end{itemize}
+\end{frame}
+
+% == Description of relinearization ==
+\begin{frame}{Relinearization \cite{fhe-lwe}}
+\end{frame}

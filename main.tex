@@ -30,6 +30,8 @@
 
 \usepackage{xspace}
 
+\usepackage{cryptocode}
+
 
 \usetikzlibrary[positioning,arrows,scopes,calc,patterns,
 backgrounds,decorations.pathmorphing,shapes.geometric]
@@ -61,6 +63,14 @@ backgrounds,decorations.pathmorphing,shapes.geometric]
 
 \frame[plain,label=title]{\titlepage}
 
+\input{tex_beamer/fg-new} 
+
+\begin{frame}[allowframebreaks]
+	\frametitle{References}
+	\bibliographystyle{amsalpha}
+	\bibliography{references.bib}
+\end{frame}
+
 
 % == From now Old stuff from proposal ==
 %
@@ -73,7 +83,7 @@ backgrounds,decorations.pathmorphing,shapes.geometric]
 %\input{tex_beamer/space-bounded}
 %
 %
-%\input{tex_beamer/fg} 
+
 %
 %\input{tex_beamer/conclusion}
 
