@@ -63,7 +63,7 @@
 	\begin{itemize}
 		\item Can we sample a random permutation in low-depth?
 		\item We use ``double'' HE: $\function{Eval}(\function{Eval}(f, \cdot), c)$ stay in $\NC^1$?
-		\item How to make sure it works when HE has \item{randomized} decryption? (our decryption is randomized, but the original construction only works for deterministic)
+		\item How to make sure it works when HE has \textit{randomized} decryption? (our decryption is randomized, but the original construction only works for deterministic)
 		\item In the proof, does the security reduction stay in $\NC^1$?
 	\end{itemize}
 \end{frame}
@@ -106,6 +106,35 @@
 	\end{itemize}
 \end{frame}
 
+\def\c{\vect{c}}
+\def\cp{\vect{c'}}
+\def\fc{f_{\c}}
+\def\fcp{f_{\cp}}
+\def\x{\vect{x}}
+
 % == Description of relinearization ==
 \begin{frame}{Relinearization \cite{fhe-lwe}}
+
+ $  \fc(\x) = \inprod{\c}{\vect{x}} = \Sum c[i] x[i]$ \quad\quad\quad
+ $  \fcp(\x) = \inprod{\cp}{\vect{x}} = \Sum c'[i] x[i]$
+  \pause\\
+ \medskip
+ Homomorphic addition:
+$$ \fc(\x)+\fcp(\x) = \inprod{\c+\cp}{\vect{x}}  = f_{\c+\cp}(\x) $$ 
+\medskip 
+\pause
+Homomorphic multiplication:
+ \begin{align*}
+ \fc\cdot\fcp  & =   (\Sum c[i] x[i]) \cdot (\Sum c'[i]x[i]) \\\pause
+        				 & =  \Sum h_{i,j} x[i]x[j]   \quad\quad \small{( h_{i,j} \text{ obtained opening parenthesis})}\pause
+\end{align*}
+\textbf{Problem:} now ciphertext this requires $\lambda^2$ bits.\pause
+
+\textbf{Solution:} Provide $\vect{\rho}_{i,j} = \E(s[i]s[j])$ under a new secret key $\vect{t}$ as part of the public key.
+ 
+ \begin{align*}
+&  \Sum h_{i,j} \vect{\rho}_{i,j} \\ % TODO: Do bm
+= & \Sum_{i,j,k} h_{i,j} \rho_{i,j}[k] t[k]\\ = & \Sum_k t[k](\sum_{i,j} h_{i,j} \rho_{i,j}[k])
+ \end{align*}
+ 
 \end{frame}
