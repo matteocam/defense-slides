@@ -1,10 +1,37 @@
 % == FG VC => Seq Comp ==
-\begin{frame}{Fine-Grained VC $\implies$ Sequentially Composable Rational Proofs}
+\section{Fine-Grained Protocols}
+
+\begin{frame}{Two Perspectives on Fine-Grained Protocols}
+	
+	\begin{itemize}
+		\item Cryptographic Perspective
+		\item  Rational Perspective
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Crypto Perspective}
+	\textit{A FG protocol is one secure against a specific complexity class $\class{C}$}.\pause
+	
+	Examples in literature:
+	\begin{itemize}
+		\item Key-Exchange secure against $o(n^2)$ advs. (Merkle79)
+		\item Maurer Space-Bounded
+		\item DVV16
+	\end{itemize}\pause
+	Our result: A FG Verifiable Computation Protocol
+\end{frame}
+
+\begin{frame}{Rational Perspective}
+\textit{In a FG protocol cheating costs strictly more than acting honestly.}\pause
+
+\textbf{Theorem:} A FG Verifiable Computation scheme yields a sequentially composable rational proof.
+
+[TODO: Image here with intuition/elaboration]
 \end{frame}
 
 % == Our main result: FG VC against NC1 adversaries from minimal assumptions ==
-\begin{frame}{Our result for fine-grained VC}
-	TODO: Say about result and assumption
+\begin{frame}{Our FG Verifiable Computation Scheme}
+	[Result statement here]
 \end{frame}
 
 % == Additional properties ==
@@ -56,10 +83,10 @@
 \end{frame}
 
 % == VC from HE in low depth ==
-\begin{frame}{VC from HE in low-depth}
+\begin{frame}{Ensuring \cite{ckv10} works in low-depth}
 	\textbf{Recall:} all our algorithms should run in $\NC^1$ and our verifier should be efficient.
 	
-	\textbf{Challenges: }
+	\textbf{Issues to take care of: }
 	\begin{itemize}
 		\item Can we sample a random permutation in low-depth?
 		\item We use ``double'' HE: $\function{Eval}(\function{Eval}(f, \cdot), c)$ stay in $\NC^1$?
@@ -69,22 +96,24 @@
 \end{frame}
 
 % == HE against NC1 circuits==
-\begin{frame}{HE against NC1 circuits}
+\begin{frame}{Obtaining our HE scheme}
 	Our result: [TODO: restating our result]
 	
 	\textbf{Our approach:}
-	\begin{itemize}
+	\begin{enumerate}
 		\item We start from the PKE secure against $\NC^1$ in \cite{fgcrypto};
 		\item We apply relinearization techniques from \cite{fhe-lwe} to obtain HE;
 		\begin{itemize}
 			\item Can homomorphically evaluate polynomials of constant degree; 
 		\end{itemize}
 		\item We extend the class of functions we can evaluate homomorphically through degree reduction techniques from \cite{razborov1987lower}.
-	\end{itemize}
+	\end{enumerate}\pause
+	\textbf{Next, we see 1 and 2.}
 \end{frame}
 
 % == Description of DVV16 ==
 \begin{frame}{PKE scheme from \cite{fgcrypto}}
+	[TODO: Make more intuitive]
 	\begin{itemize}
 		\item $\PKEKeygen_{\sk}(\unlambda):$
 		\begin{enumerate}
@@ -113,7 +142,8 @@
 \def\x{\vect{x}}
 
 % == Description of relinearization ==
-\begin{frame}{Relinearization \cite{fhe-lwe}}
+\begin{frame}{Relinearization step}
+[TODO: Make all more intuitive]
 
  $  \fc(\x) = \inprod{\c}{\vect{x}} = \Sum c[i] x[i]$ \quad\quad\quad
  $  \fcp(\x) = \inprod{\cp}{\vect{x}} = \Sum c'[i] x[i]$
@@ -125,16 +155,21 @@ $$ \fc(\x)+\fcp(\x) = \inprod{\c+\cp}{\vect{x}}  = f_{\c+\cp}(\x) $$
 \pause
 Homomorphic multiplication:
  \begin{align*}
- \fc\cdot\fcp  & =   (\Sum c[i] x[i]) \cdot (\Sum c'[i]x[i]) \\\pause
-        				 & =  \Sum h_{i,j} x[i]x[j]   \quad\quad \small{( h_{i,j} \text{ obtained opening parenthesis})}\pause
+ \fc\cdot\fcp(\x)  & =   (\Sum c[i] x[i]) \cdot (\Sum c'[i]x[i]) \\
+        				 & =  \Sum h_{i,j} x[i]x[j]   \quad\quad \small{( h_{i,j} \text{ obtained opening parenthesis})}
 \end{align*}
+\pause
 \textbf{Problem:} now ciphertext this requires $\lambda^2$ bits.\pause
 
-\textbf{Solution:} Provide $\vect{\rho}_{i,j} = \E(s[i]s[j])$ under a new secret key $\vect{t}$ as part of the public key.
+\textbf{Solution:} Provide $\vect{\rho}_{i,j} = \E(s[i]s[j])$ under a new secret key $\vect{t}$ as part of the public key.\pause
  
- \begin{align*}
-&  \Sum h_{i,j} \vect{\rho}_{i,j} \\ % TODO: Do bm
-= & \Sum_{i,j,k} h_{i,j} \rho_{i,j}[k] t[k]\\ = & \Sum_k t[k](\sum_{i,j} h_{i,j} \rho_{i,j}[k])
- \end{align*}
+$
+  \Sum h_{i,j} \vect{\rho}_{i,j}  % TODO: Do bm
+=  \Sum_{i,j,k} h_{i,j} \rho_{i,j}[k] t[k] = \Sum_k t[k](\sum_{i,j} h_{i,j} \rho_{i,j}[k]) = f_{\c\cdot\cp}(\vect{t})
+$
  
+\end{frame}
+
+\begin{frame}{Leveled Homomorphic Evaluation}
+	[Intuition on doing relinearization at every level]
 \end{frame}
