@@ -1,22 +1,80 @@
 \section{Introduction}
 
 \begin{frame}{Motivation}
-[Cloud computing; rational provers; etc.]
+
+\begin{columns}
+	\begin{column}{0.67\textwidth}
+\begin{block}{The Context}
+	A \textit{delegator} requests a \textit{worker} to perform a computation for her.
+\end{block}
+\onslide<+->
+\begin{itemize}[<+- | alert@+>]
+	\item Large scale distributed computation (e.g. volunteer computation, SETI@home,\dots)
+	\item Cloud computing.
+	\item Weak peripheral devices.
+\end{itemize}
+\end{column}
+\begin{column}{0.33\textwidth}
+[Picture here]
+\end{column}
+\end{columns}
+\pause
+\bigskip
+\textbf{Goal of Verifiable Computation (VC):} \textit{Verifying} the work of \textit{untrusted} workers.
 \end{frame}
 
+\begin{frame}{Rational Verifiable Computation}
+\textbf{Goal of Verifiable Computation (VC):} \textit{Verifying} the work of \textit{untrusted} workers.\pause
+
+\textbf{Our Focus: } VC where workers are \textbf{rational}, \pause i.e. maximizing \textit{incentives}. \pause
+
+\bigskip
+\textbf{Is this model plausible?}
+
+%TODO: add context for rational provers
+% TODO: Add picture 
+
+\end{frame}
+
+\begin{frame}{Is this Model a Plausible Approximation?}
+\begin{block}{Incentives in Outsourced Computation:}
+	\begin{itemize}[<+- | alert@+>]
+		\item  payments for computations on the cloud; % XXX: who applies this model?
+		\item 'rewarded' volunteer computation (SETI\@ HOME, GridCoin);
+		\item  rewards for mining in cryptocurrencies.
+	\end{itemize}
+\end{block}\pause 
+\textbf{What are the Advantages?}
+\end{frame}
+
+\begin{frame}{Advantages of Exploiting Rationality}
+
+	\begin{itemize}[<+- | alert@+>]
+		\item Efficient Protocols (especially verification);
+		\item Simple Protocols;
+		\item  Unconditional Results (often).
+	\end{itemize}
+
+\end{frame}
 
 % Metaphor
+
+% TODO: Add next to each point a hint about the parts of the talk related to it.
 \begin{frame}{My Thesis, Succinctly}
 	\begin{enumerate}
 		\item We can efficiently delegate (subsets of) \textit{feasible} computations to a rational server.\pause
 		\item If a server ``cares'' about \textit{costs of computation}, existing techniques won't work when delegating multiple times; \pause I describe techniques without this flaw.\pause
-		\item As an alternative approach to solve (2), with minimal assumptions we can design protocols where \textit{cheating costs more than acting honestly.}
+		\item As an alternative approach to solve (2), with minimal assumptions we can design protocols where \textit{cheating does cost more} than acting honestly.
 	\end{enumerate}
 \end{frame}
 
 % Papers
-\begin{frame}{Related Papers}
-	[List of publications tied to the thesis]
+\begin{frame}{Papers Related to This Thesis}
+\begin{itemize}
+	\item M. Campanelli, and R. Gennaro. ``Sequentially composable rational proofs." \textit{International Conference on Decision and Game Theory for Security. Springer, Cham, 2015.}
+	\item M. Campanelli, and R. Gennaro. ``Efficient Rational Proofs for Space Bounded Computations." \textit{International Conference on Decision and Game Theory for Security. Springer, Cham, 2017.}
+	\item M. Campanelli and R. Gennaro. ``Fine-Grained Secure Computation'' \textit{Submitted to TCC 2018}
+\end{itemize}
 \end{frame}
 
 
