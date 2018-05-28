@@ -9,38 +9,59 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Crypto Perspective}
-	\textit{A FG protocol is one secure against a specific complexity class $\class{C}$}.\pause
-	
-	Examples in literature:
+\begin{frame}[t]{Crypto Perspective}
+	\textit{A FG protocol is one secure against a specific complexity class $\class{C}$}.\pause\\
+	\bigskip
+\textit{Examples in literature:}
 	\begin{itemize}
-		\item Key-Exchange secure against $o(n^2)$ advs. (Merkle79)
-		\item Maurer Space-Bounded
-		\item DVV16
-	\end{itemize}\pause
-	Our result: A FG Verifiable Computation Protocol
+		\item Key-Exchange secure against $o(n^2)$ advs \cite{merkle}. \pause
+		\item Key-Exchange and Symm. Key secure against space-bounded advs \cite{maurer}.\pause 
+		\item Public-Key Encryption secure against $\NC^1$ advs \cite{fgcrypto} under $\L \not = \NC^1$.
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Rational Perspective}
-\textit{In a FG protocol cheating costs strictly more than acting honestly.}\pause
+\begin{frame}[t]{Rational Perspective}
+\textit{In a FG protocol cheating costs strictly more than acting honestly.}\pause\\\medskip
 
-\textbf{Theorem:} A FG Verifiable Computation scheme yields a sequentially composable rational proof.
-
-[TODO: Image here with intuition/elaboration]
+\begin{block}{Theorem}
+	A FG Verifiable Computation scheme yields a sequentially composable rational proof.
+\end{block}
+\onslide<2->
+\begin{columns}
+	\column{0.5\textwidth}
+	\begin{figure}
+		\includegraphics[scale=0.14]{pics/fg-sc.png}
+		\caption{Cost/Reward in a FG protocol}
+	\end{figure}
+	\onslide<3->
+	\column{0.5\textwidth}
+		\begin{figure}
+			\includegraphics[scale=0.15]{pics/sc-char.png}
+			\caption{Sequentially Composability (characterization)}
+		\end{figure}
+			
+\end{columns}
 \end{frame}
 
 % == Our main result: FG VC against NC1 adversaries from minimal assumptions ==
 \begin{frame}{Our FG Verifiable Computation Scheme}
-	[Result statement here]
+
+\begin{block}{Our Main Result}
+	A Non-Interactive Verifiable Computation Scheme secure against $\NC^1$ under $\L \not = \NC^1$.
+\end{block}
+\pause
+\textbf{Properties:}
+\begin{itemize}[<+- | alert@+>]
+	\item I/O private;
+	\item In the preprocessing model;
+	\item Supports delegation of (a subset of) $\ACzt$.
+\end{itemize}
 \end{frame}
 
-% == Additional properties ==
-\begin{frame}{Properties of our VC scheme}
-\end{frame}
 
 % == How to obtain this VC: HE + transformation ==
 % Say here that another result will be for HE
-\begin{frame}{How to Obtain Fine-Grained VC}
+\begin{frame}{How We Obtain Fine-Grained VC}
 	Core of our approach is \cite{ckv10}:
 	\begin{itemize}
 		\item  Obtains VC from Homomorphic Encryption (HE)
@@ -60,47 +81,73 @@
 		\item $\func{Eval}_{\pk}(f, \E(x)) \to \E(f(x))$
 	\end{enumerate}
 	\pause
-	
-	\begin{result}[HE against $\NC^1$ adversaries]
-		TODO
-	\end{result}
+	\bigskip
+	\begin{block}{Our Additional Result}
+		HE against secure against $\NC^1$ adversaries under $\L \not = \NC^1$ supporting evaluation of (a subset of) $\ACzt$.
+	\end{block}
 \end{frame}
 
 % == VC from HE ==
-\begin{frame}{VC from HE (\cite{ckv10})}
-	TODO: Intuition of ckv10
-	\begin{itemize}
-		\item 
-	\end{itemize}
+\begin{frame}[t]{VC from HE (\cite{ckv10})}
+%	\begin{framed}
+%	Core of our approach is \cite{ckv10}:
+%	\begin{itemize}
+%		\item  Obtains VC from Homomorphic Encryption (HE)
+%	\end{itemize}
+%	\end{framed}
+%	\pause
+\begin{columns}
+		\column{0.65\textwidth}
+	\procedure{Protocol from \cite{ckv10}}{%
+		\textbf{Delegator} \> \> \textbf{Worker}  \\
+		r \sample \bin^n\\
+		y^*_0 \gets f(r)\\
+		\vect{c}_0 \gets \E(r) \pclb
+		\pcintertext[dotted]{End Offline Stage}
+		\vect{c}_1 \gets \E(x)\\
+		b \sample \bin \> \> \\
+		\> \xrightarrow{\vect{c}_b, \vect{c}_{1-b}} \>  \\
+		\> \> \vect{y}_0 \gets \func{Eval}(f, \vect{c}_0)    \\
+		\> \> \vect{y}_1 \gets \func{Eval}(f, \vect{c}_1)    \\
+		\> \xleftarrow{\vect{y}_b,\vect{y}_{1-b}} \>   \\
+		\text{accept } \func{Dec}(\vect{y}_1) \text{ if } \func{Dec}(\vect{y}_0) = y^*_0 \> \>}
+	\onslide<2->
+	\column{0.35\textwidth}
+	\textbf{Then:}
 	\pause
-	\textbf{Enhancements:}
 	\begin{itemize}
 		% TODO: Improve graphics so that changes are clear
-		\item \textbf{To amplify error:} use random permutation
+		\item \textbf{To amplify error:} use random permutation\pause
 		\item \textbf{To make reusable:} use HE  on top of construction.
 	\end{itemize}
+	
+	\end{columns}
 	% Scaling this up: error amplification (permutation); reusability
 \end{frame}
 
+
 % == VC from HE in low depth ==
 \begin{frame}{Ensuring \cite{ckv10} works in low-depth}
-	\textbf{Recall:} all our algorithms should run in $\NC^1$ and our verifier should be efficient.
+	\textbf{Recall:} all our algorithms should run in $\NC^1$ and our verifier should be efficient.\pause
 	
 	\textbf{Some of the issues to take care of: }
-	\begin{itemize}
-		\item Can we sample a random permutation in low-depth?
-		\item We use ``double'' HE: $\function{Eval}(\function{Eval}(f, \cdot), c)$ stay in $\NC^1$?
+	\begin{itemize}[<+- | alert@+>]
+		\item How can we sample a random permutation in sufficiently low-depth?
+		\item When using ``double'' HE, does double evaluation stay in $\NC^1$?
 %		\item How to make sure it works when HE has \textit{randomized} decryption? (our decryption is randomized, but the original construction only works for deterministic)
 		\item In the proof, does the security reduction stay in $\NC^1$?
 	\end{itemize}
 \end{frame}
 
 % == HE against NC1 circuits==
-\begin{frame}{Obtaining our HE scheme}
-	Our result: [TODO: restating our result]
-	
+\begin{frame}[t]{Obtaining Our HE scheme}
+\begin{block}{Our Additional Result}
+	HE against secure against $\NC^1$ adversaries under $\L \not = \NC^1$ supporting evaluation of (a subset of) $\ACzt$.
+\end{block}
+\pause
+\bigskip
 	\textbf{Our approach:}
-	\begin{enumerate}
+	\begin{enumerate}[<+- | alert@+>]
 		\item We start from the PKE secure against $\NC^1$ in \cite{fgcrypto};
 		\item We apply relinearization techniques from \cite{fhe-lwe} to obtain HE;
 		\begin{itemize}

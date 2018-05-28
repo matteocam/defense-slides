@@ -1,6 +1,6 @@
 \section{On the Cost of Computation and Using Rational Proofs Multiple Times}
 
-\begin{frame}{Accounting for Costs}
+\begin{frame}{Computation has a Price: Accounting for Costs}
 	\begin{columns}
 	\column{0.60\textwidth}
 	\begin{block}{So far:}
@@ -99,7 +99,7 @@ Therefore $2\tilde{R}_{rnd} > R^*$
 
 \begin{framed}
 \begin{block}{Desired Guarantee:}
-	There should be little gain in doing several, \textit{incorrect} computations instead of a single correct one.
+	There should be no gain in doing several, \textit{incorrect} computations instead of a single correct one.
 \end{block}
 \end{framed}
 	\bigskip
@@ -121,8 +121,10 @@ Therefore $2\tilde{R}_{rnd} > R^*$
 
 \begin{frame}{Sequential Composability: An Alternative Characterization}
 \begin{figure}
-	\includegraphics[scale=0.27]{pics/sc-char.png}
+	\includegraphics[scale=0.26]{pics/sc-char.png}
 \end{figure}
+$$ \tilde{C} > \tilde{R}$$
+$$ \text{(assuming } R^* = C^* = 1)$$
 \end{frame}
 
 \begin{frame}{Space-Bounded Computation and Sequential Composability}
@@ -155,7 +157,7 @@ There exist sequentially composable rational proofs for ``regular'' arithmetic c
 
 \begin{frame}{Why Are These Protocols Sequentially Composable?}
 	\begin{enumerate}
-		\item Reward depend on ``checks'' (although with low soundness);\pause
+		\item Reward depends on ``checks'' (although with low soundness);\pause
 		\begin{itemize}
 			\item Different than other approaches where reward depends on \textit{scoring rules}.
 		\end{itemize}\pause
@@ -165,16 +167,16 @@ There exist sequentially composable rational proofs for ``regular'' arithmetic c
 
 \begin{frame}{On Cost Assumptions for Sequential Composability}
 \begin{block}{Requirement (connecting cost and probability of guessing)}\pause
-	It should not be too easy to guess a solution having done little work. 
+{\small 	It should not be too easy to guess a solution having done little work.} 
 \end{block}	
 	
 \pause
 \begin{figure}
-	\includegraphics[scale=0.2]{pics/example-and.png}
+	\includegraphics[scale=0.21]{pics/example-and.png}
 \end{figure}
 \pause
 \begin{figure}
-	\includegraphics[scale=0.2]{pics/example-sum.png}
+	\includegraphics[scale=0.21]{pics/example-sum.png}
 \end{figure}
 \pause
 \textbf{Our assumption:} guessing successfully w/ probability $p$ requires fraction of total work $p$.
