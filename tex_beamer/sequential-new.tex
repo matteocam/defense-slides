@@ -32,11 +32,37 @@
 % Say about individual rationality here
 \end{frame}
 
-\begin{frame}{Potential Issues with Multiple Proofs}
-[Explain what could go wrong when multiple proofs are involved]
+\begin{frame}[t]{We May Still Have Issues with Multiple Proofs}
+\large{\textbf{On input $x$:}}
+\begin{columns}
+	\column{0.5\textwidth}
+\begin{block}{Honest prover $P$:}
+	\begin{figure}
+		\includegraphics[scale=0.18]{pics/honest-rew.png}
+	\end{figure}
+\end{block}
+\onslide<2->
+	\column{0.5\textwidth}
+%%%
+\bigskip
+\begin{block}{Some other prover $\disP$:}
+	\begin{figure}
+		\includegraphics[scale=0.18]{pics/dishonest-rew-one.png}
+	\end{figure}
+\end{block}
+\end{columns}
+%%%
+\onslide<3->
+\large{\textbf{On multiple inputs $x_1, x_2, x_3$:}}
+\begin{block}{The prover $\disP$ \underline{profits} more than $P$:}
+	\begin{figure}
+		\includegraphics[scale=0.18]{pics/dishonest-rew-many.png}
+	\end{figure}
+\end{block}
+
 \end{frame}
 
-\begin{frame}[t]{We Show Such Issue Do Occur in Rational Proofs}
+\begin{frame}[t]{Such Issue Do Occur in Rational Proofs}
 	% TODO: Consider scaling between 0 and 1
 	% Result: In Micali's protocol for threshold a random strategy is more profitable than an honest one
 \large{\textbf{A worker can profit by just replying at random\footnote{A $O(1)$-cost strategy} in protocol by \cite{am1}.}}\onslide<2->
@@ -55,7 +81,7 @@
 	\]\\
 	\medskip
 	\onslide<4->
-\textbf{	Therefore $2\tilde{R}_{rnd} > R^*$}
+Therefore $2\tilde{R}_{rnd} > R^*$
 {(It's more profitable to simply cheat twice)}
 	\column{0.40\textwidth}
 	\onslide<1->
@@ -64,7 +90,9 @@
 		
 	\end{figure}
 \end{columns}
-
+\medskip
+	\onslide<5-> \textbf{The protocol in \cite{am1} is not \textit{sequentially composable}}.
+	\vfill
 \end{frame}
 
 \begin{frame}{Sequential Composability: A Definition}
@@ -102,10 +130,37 @@
 \begin{block}{Theorem (informal)}
 	Our Rational Proof for Space Bounded Computation is Sequentially Composable.
 \end{block}
+\bigskip
+\begin{figure}
+	\includegraphics[scale=0.3]{pics/space-protocol.png}
+%	\caption{Configuration Graph of a deterministic computation}
+\end{figure}
 \end{frame}
 
-\begin{frame}{Log-depth Arithmetic Circuits and Space-Bounded Computation}
-[Result for regular arithmetic circuits; corollary: FFT]
+\begin{frame}[t]{Log-depth Arithmetic Circuits and Sequential Composability}
+\begin{block}{Theorem (informal)}
+There exist sequentially composable rational proofs for ``regular'' arithmetic circuits of $\log$-depth and $\poly$-size. with:
+		\begin{itemize}
+			\item $\log n$ rounds;
+			\item polylog verifier.
+			\item $O(T)$ prover.
+		\end{itemize}
+\end{block}
+
+\begin{figure}
+	\includegraphics[scale=0.36]{pics/fft.jpg}
+	\caption{Circuit for FFT}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Why Are These Protocols Sequentially Composable?}
+	\begin{enumerate}
+		\item Reward depend on ``checks'' (although with low soundness);\pause
+		\begin{itemize}
+			\item Different than other approaches where reward depends on \textit{scoring rules}.
+		\end{itemize}\pause
+		\item Assumptions on costs.
+	\end{enumerate}
 \end{frame}
 
 \begin{frame}{On Cost Assumptions for Sequential Composability}
