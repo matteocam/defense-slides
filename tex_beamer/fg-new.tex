@@ -53,7 +53,7 @@
 \textbf{Properties:}
 \begin{itemize}[<+- | alert@+>]
 	\item I/O private;
-	\item In the preprocessing model;
+	\item Reusable (in the preprocessing model);
 	\item Supports delegation of (a subset of) $\ACzt$.
 \end{itemize}
 \end{frame}
@@ -154,71 +154,6 @@
 			\item Can homomorphically evaluate polynomials of constant degree; 
 		\end{itemize}
 		\item We extend the class of functions we can evaluate homomorphically through degree reduction techniques from \cite{razborov1987lower}.
-	\end{enumerate}\pause
-	\textbf{Next, we see 1 and 2.}
-\end{frame}
-
-% == Description of DVV16 ==
-\begin{frame}{PKE scheme from \cite{fgcrypto}}
-	[TODO: Make more intuitive]
-	\begin{itemize}
-		\item $\PKEKeygen_{\sk}(\unlambda):$
-		\begin{enumerate}
-			\item Sample $(\M, \k) \gets \KSample(\unlambda)$;\\
-			 {\color{red}(Property: if $\r$ random, $\transp{\r}  \M$ ``looks'' random to $\NC^1$ circuit)}
-			\item Output $(\pk = \M, \sk = \k)$.
-		\end{enumerate}
-		\pause
-		\item $\PKEEnc_{\pk}(\mu):$
-		\begin{enumerate}
-			\item Sample $\r \leftarrow_{\$} \bit^{\lambda}$;
-			\item Let $\transp{t} = (0 \ \dots 0 \ 1) \in \bit^{\lambda}$;
-			\item Output $\transp{\c} = \transp{\r}  \M + \mu\transp{\t}$.
-		\end{enumerate}
-		\pause
-		\item $\PKEDec_{\sk}(\c):$
-		\begin{enumerate}
-			\item Output $\inprod{\k}{\c}$
-		\end{enumerate}
-		
-	\end{itemize}
-\end{frame}
-
-\def\c{\vect{c}}
-\def\cp{\vect{c'}}
-\def\fc{f_{\c}}
-\def\fcp{f_{\cp}}
-\def\x{\vect{x}}
-
-% == Description of relinearization ==
-\begin{frame}{Relinearization step}
-[TODO: Make all more intuitive]
-
- $  \fc(\x) = \inprod{\c}{\vect{x}} = \Sum c[i] x[i]$ \quad\quad\quad
- $  \fcp(\x) = \inprod{\cp}{\vect{x}} = \Sum c'[i] x[i]$
-  \pause\\
- \medskip
- Homomorphic addition:
-$$ \fc(\x)+\fcp(\x) = \inprod{\c+\cp}{\vect{x}}  = f_{\c+\cp}(\x) $$ 
-\medskip 
-\pause
-Homomorphic multiplication:
- \begin{align*}
- \fc\cdot\fcp(\x)  & =   (\Sum c[i] x[i]) \cdot (\Sum c'[i]x[i]) \\
-        				 & =  \Sum h_{i,j} x[i]x[j]   \quad\quad \small{( h_{i,j} \text{ obtained opening parenthesis})}
-\end{align*}
-\pause
-\textbf{Problem:} now ciphertext this requires $\lambda^2$ bits.\pause
-
-\textbf{Solution:} Provide $\vect{\rho}_{i,j} = \E(s[i]s[j])$ under a new secret key $\vect{t}$ as part of the public key.\pause
- 
-$
-  \Sum h_{i,j} \vect{\rho}_{i,j}\pause  % TODO: Do bm
-=  \Sum_{i,j,k} h_{i,j} \rho_{i,j}[k] t[k] \pause = \Sum_k t[k](\sum_{i,j} h_{i,j} \rho_{i,j}[k])\pause = f_{\c\cdot\cp}(\vect{t})
-$
- 
-\end{frame}
-
-\begin{frame}{Leveled Homomorphic Evaluation}
-	[Intuition on doing relinearization at every level]
+	\end{enumerate}%\pause
+	%\textbf{Next, we see 1 and 2.}
 \end{frame}

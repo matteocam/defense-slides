@@ -1,11 +1,16 @@
 \section{Conclusions}
 
 \begin{frame}{Summary}
-	
+		\begin{itemize}[<+- | alert@+>]	
+			\item A critique of the model of rational proofs for multiple delegations;
+			%\item A framework for multiple delegations (sequential composability);
+			\item (Sequentially composable) protocols for $\log$-depth arithmetic circuits and space-bounded computations.
+			\item VC and HE against $\NC^1$ adversaries and computable in low-depth.
+		\end{itemize}
 \end{frame}
 
 \begin{frame}{Related Work (Results on Rational Proofs)}
-\begin{itemize}
+\begin{itemize}[<+- | alert@+>]
 	\item First rational proofs for space-bounded computation
 	\item $\cite{ratsumchecks}$ achieves constant-round \textit{rational arguments} for $\P$ (with cryptographic assumptions)
 	\begin{itemize}
@@ -22,7 +27,7 @@
 
 \begin{frame}{Related Work (Results on Fine-Grained Protocols)}
 	Comparison with information-theoretic works:
-	\begin{itemize}
+	\begin{itemize}[<+- | alert@+>]
 		\item ``Proofs for Muggles'' \cite{muggles} obtains constant-round protocols for $\NC^1$.
 		\begin{itemize}
 			\item results in \cite{muggles} hold unconditionally; 
@@ -34,5 +39,27 @@
 \end{frame}
 
 \begin{frame}{Future Work}
-	
+	\textbf{On Rational Proofs:}
+	\begin{itemize}[<+- |  alert@+>]
+		\item Rational proofs for $\P$ and $\NP$
+		\item validating the model of rational proofs in the real world (How?)
+		\item better parameters for the budget for rational proofs 
+		% \item right now, the only parameter we use is n and we only require the budget to be poly(n). It'd be great to have a specific budget
+		%		 parameter \beta, on the lines of the security parameter in crypto.
+		%\item enforcing cost assumptions (with randomized encodings or other approaches)
+		%		\item further applications of FG schemes to sequentially composable rational proofs
+		%		 \item e.g. can one get a compiler from a stand alone rational scheme to a sequentially composable one having
+	\end{itemize}
+	\onslide<+->{
+		\textbf{On Fine-Grained Crypto:}
+		\begin{itemize}[<+- |  alert@+>]
+			%\item pushing further on the partial results we have
+			\item Other interesting crypto obtainable from $\L \neq \NC^1$ in a fine-grained model?
+			\begin{itemize}
+				\item Obfuscation? ABE? FE?
+			\end{itemize}
+			\item All the questions above, but with adversaries of \textit{bounded size} (instead of bounded depth)
+			%\item FG primitives in the model of size as first step
+		\end{itemize}
+	}
 \end{frame}
