@@ -12,6 +12,10 @@
 %		\item Ensuring ``compact'' budget for delegators.
 %	\end{itemize}
 \end{itemize}
+\onslide<1->
+\begin{figure}
+	\includegraphics[scale=0.23]{pics/interaction.png}
+\end{figure}
 % Recall interactive proofs
 % Recall our goal
 \end{frame}
@@ -25,7 +29,7 @@
 				\item \emph{("The honest prover always replies correctly")} 
 				$$ \forall x\  \Pr[output(P,V)(x) = f(x) ] = 1$$
 				\item \emph{("Any other prover will earn less than the honest one")}
-				$$ \forall \disP \ \forall x \  \expRewProtHon \geq \expRewProtDis + \delta_{\disP}(x)  $$
+				$$ \forall \disP \ \forall x \  \expRewProtHon - \expRewProtDis \geq \delta_{\disP}(x)  $$
 				for some reward function $\rew$ and gap $\delta_{\disP}(x) \geq 0$
 			\end{enumerate}
 		\end{framed}

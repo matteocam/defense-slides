@@ -86,11 +86,11 @@
 \begin{frame}{Ensuring \cite{ckv10} works in low-depth}
 	\textbf{Recall:} all our algorithms should run in $\NC^1$ and our verifier should be efficient.
 	
-	\textbf{Issues to take care of: }
+	\textbf{Some of the issues to take care of: }
 	\begin{itemize}
 		\item Can we sample a random permutation in low-depth?
 		\item We use ``double'' HE: $\function{Eval}(\function{Eval}(f, \cdot), c)$ stay in $\NC^1$?
-		\item How to make sure it works when HE has \textit{randomized} decryption? (our decryption is randomized, but the original construction only works for deterministic)
+%		\item How to make sure it works when HE has \textit{randomized} decryption? (our decryption is randomized, but the original construction only works for deterministic)
 		\item In the proof, does the security reduction stay in $\NC^1$?
 	\end{itemize}
 \end{frame}
@@ -121,12 +121,14 @@
 			 {\color{red}(Property: if $\r$ random, $\transp{\r}  \M$ ``looks'' random to $\NC^1$ circuit)}
 			\item Output $(\pk = \M, \sk = \k)$.
 		\end{enumerate}
+		\pause
 		\item $\PKEEnc_{\pk}(\mu):$
 		\begin{enumerate}
 			\item Sample $\r \leftarrow_{\$} \bit^{\lambda}$;
 			\item Let $\transp{t} = (0 \ \dots 0 \ 1) \in \bit^{\lambda}$;
 			\item Output $\transp{\c} = \transp{\r}  \M + \mu\transp{\t}$.
 		\end{enumerate}
+		\pause
 		\item $\PKEDec_{\sk}(\c):$
 		\begin{enumerate}
 			\item Output $\inprod{\k}{\c}$
@@ -164,8 +166,8 @@ Homomorphic multiplication:
 \textbf{Solution:} Provide $\vect{\rho}_{i,j} = \E(s[i]s[j])$ under a new secret key $\vect{t}$ as part of the public key.\pause
  
 $
-  \Sum h_{i,j} \vect{\rho}_{i,j}  % TODO: Do bm
-=  \Sum_{i,j,k} h_{i,j} \rho_{i,j}[k] t[k] = \Sum_k t[k](\sum_{i,j} h_{i,j} \rho_{i,j}[k]) = f_{\c\cdot\cp}(\vect{t})
+  \Sum h_{i,j} \vect{\rho}_{i,j}\pause  % TODO: Do bm
+=  \Sum_{i,j,k} h_{i,j} \rho_{i,j}[k] t[k] \pause = \Sum_k t[k](\sum_{i,j} h_{i,j} \rho_{i,j}[k])\pause = f_{\c\cdot\cp}(\vect{t})
 $
  
 \end{frame}

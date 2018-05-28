@@ -1,7 +1,34 @@
-\section{Rational Proofs We Can Use Multiple Times}
+\section{On the Cost of Computation and Using Rational Proofs Multiple Times}
 
 \begin{frame}{Accounting for Costs}
-[Say we can scale reward appropriately and this works for one-time]
+	\begin{columns}
+	\column{0.60\textwidth}
+	\begin{block}{So far:}
+		\textit{Utility(worker)} $ = \function{Reward}$
+	\end{block}
+	\onslide<2->
+	\begin{block}{Now :}
+		\textit{Utility(worker)} $= \function{Reward} - \function{Cost}$
+	\end{block}
+	\column{0.40\textwidth}
+	\onslide<3->
+	\begin{block}{}
+		$R - \tilde{R} \geq \delta \hspace*{\fill} (1) \hspace*{\fill}$
+	\end{block}
+	\onslide<4->
+	\begin{block}{}
+		$(R-C) - (\tilde{R}-\tilde{C}) \geq \delta \hspace*{\fill} (2) \hspace*{\fill}$			
+	\end{block}
+	\end{columns}
+	\bigskip
+		\onslide<5->
+\begin{block}{How to achieve (2) given (1)?}
+\end{block}
+		\onslide<6->
+	\begin{block}{Solution: scale reward appropriately}
+		If (1) holds then scaling the reward function by a linear function of $C$ is sufficient to obtain (2).
+	\end{block}
+%[Say we can scale reward appropriately and this works for one-time]
 % Say about individual rationality here
 \end{frame}
 
@@ -9,22 +36,72 @@
 [Explain what could go wrong when multiple proofs are involved]
 \end{frame}
 
-\begin{frame}{Issues in Existing Rational Proofs}
+\begin{frame}[t]{We Show Such Issue Do Occur in Rational Proofs}
+	% TODO: Consider scaling between 0 and 1
 	% Result: In Micali's protocol for threshold a random strategy is more profitable than an honest one
-	[Show that in AzarAndMicali it is rational to use a random strategy]
+\large{\textbf{A worker can profit by just replying at random\footnote{A $O(1)$-cost strategy} in protocol by \cite{am1}.}}\onslide<2->
+\medskip
+\begin{columns}
+	\column{0.60\textwidth}
+	For a prover giving random answers:
+	\onslide<2->
+	\begin{align*}
+	\tilde{R}_{rnd} > 1
+	\end{align*}
+	\onslide<3->
+	Whereas for the honest prover:
+	\[
+	R^* \leq 2
+	\]\\
+	\medskip
+	\onslide<4->
+\textbf{	Therefore $2\tilde{R}_{rnd} > R^*$}
+{(It's more profitable to simply cheat twice)}
+	\column{0.40\textwidth}
+	\onslide<1->
+	\begin{figure}
+		\includegraphics[scale=0.7]{pics/threshold-circ.png}
+		
+	\end{figure}
+\end{columns}
+
 \end{frame}
 
 \begin{frame}{Sequential Composability: A Definition}
-	content...
+
+\begin{framed}
+\begin{block}{Desired Guarantee:}
+	There should be little gain in doing several, \textit{incorrect} computations instead of a single correct one.
+\end{block}
+\end{framed}
+	\bigskip
+\pause
+	\begin{block}{Definition}
+		A rational proof $(P,V)$ for $f$ 
+		is $\epsilon$-{\sf sequentially composable} for an input distribution $\cal D$, if:
+			\pause
+		\begin{itemize}
+			\item  for every prover $\disP$, 
+				\pause
+			\item	$x,x_1,\ldots,x_k$ drawn according to ${\cal D}$,
+		\end{itemize}
+				\pause
+		$$C(x) \geq \sum_{i=1}^k 
+		\tilde{C}(x_i)\implies \sum_{i}\tilde{R}(x_i) - R \leq \epsilon$$
+	\end{block}
 \end{frame}
 
-\begin{frame}{Sequential Composability: A Sufficient Condition}
-	content...
+\begin{frame}{Sequential Composability: An Alternative Characterization}
+\begin{figure}
+	\includegraphics[scale=0.27]{pics/sc-char.png}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Space-Bounded Computation and Sequential Composability}
 	% Mention cost assumption that we will talk about later
-	[Say our previous protocol is sequentialy composable]
+\begin{block}{Theorem (informal)}
+	Our Rational Proof for Space Bounded Computation is Sequentially Composable.
+\end{block}
 \end{frame}
 
 \begin{frame}{Log-depth Arithmetic Circuits and Space-Bounded Computation}
@@ -32,5 +109,18 @@
 \end{frame}
 
 \begin{frame}{On Cost Assumptions for Sequential Composability}
-	content...
+\begin{block}{Requirement (connecting cost and probability of guessing)}\pause
+	It should not be too easy to guess a solution having done little work. 
+\end{block}	
+	
+\pause
+\begin{figure}
+	\includegraphics[scale=0.2]{pics/example-and.png}
+\end{figure}
+\pause
+\begin{figure}
+	\includegraphics[scale=0.2]{pics/example-sum.png}
+\end{figure}
+\pause
+\textbf{Our assumption:} guessing successfully w/ probability $p$ requires fraction of total work $p$.
 \end{frame}

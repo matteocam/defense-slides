@@ -3,7 +3,7 @@
 \begin{frame}{Motivation}
 
 \begin{columns}
-	\begin{column}{0.67\textwidth}
+	\column{0.5\textwidth}
 \begin{block}{The Context}
 	A \textit{delegator} requests a \textit{worker} to perform a computation for her.
 \end{block}
@@ -13,23 +13,26 @@
 	\item Cloud computing.
 	\item Weak peripheral devices.
 \end{itemize}
-\end{column}
-\begin{column}{0.33\textwidth}
-[Picture here]
-\end{column}
+\column{0.5\textwidth}
+\begin{figure}
+	\includegraphics[scale=0.17]{pics/alice.png}
+\end{figure}
 \end{columns}
 \pause
 \bigskip
-\textbf{Goal of Verifiable Computation (VC):} \textit{Verifying} the work of \textit{untrusted} workers.
+\textbf{Issue: } Untrusted Workers.\\
+\pause
+\medskip
+\textbf{Verifiable Computation (VC):} Practical protocols offering guarantees in presence of untrusted workers.
 \end{frame}
 
-\begin{frame}{Rational Verifiable Computation}
-\textbf{Goal of Verifiable Computation (VC):} \textit{Verifying} the work of \textit{untrusted} workers.\pause
+\begin{frame}[t]{Rational Verifiable Computation}
+\textbf{Verifiable Computation (VC):} Practical protocols offering guarantees in presence of untrusted workers.\\ \pause
+\vspace{1.6cm}
+{\large \textbf{Our Focus: } VC where workers are \textbf{rational}, \pause i.e. maximizing \textit{incentives}.} \pause
 
-\textbf{Our Focus: } VC where workers are \textbf{rational}, \pause i.e. maximizing \textit{incentives}. \pause
-
-\bigskip
-\textbf{Is this model plausible?}
+\vspace{1.3cm}
+\textbf{Why is this model interesting?}
 
 %TODO: add context for rational provers
 % TODO: Add picture 
@@ -40,11 +43,12 @@
 \begin{block}{Incentives in Outsourced Computation:}
 	\begin{itemize}[<+- | alert@+>]
 		\item  payments for computations on the cloud; % XXX: who applies this model?
-		\item 'rewarded' volunteer computation (SETI\@ HOME, GridCoin);
+		\item 'rewarded' volunteer computation (SETI@HOME, GridCoin);
 		\item  rewards for mining in cryptocurrencies.
 	\end{itemize}
-\end{block}\pause 
-\textbf{What are the Advantages?}
+\end{block}
+%\pause 
+%\textbf{What are the Advantages?}
 \end{frame}
 
 \begin{frame}{Advantages of Exploiting Rationality}
@@ -60,11 +64,13 @@
 % Metaphor
 
 % TODO: Add next to each point a hint about the parts of the talk related to it.
-\begin{frame}{My Thesis, Succinctly}
+\begin{frame}[t]{My Thesis, Succinctly}
+	\textbf{Goal of Rational VC:} guarantees in presence of rational (and untrusted) workers.\\\vspace{0.9cm} \pause
+	\textbf{This Talk:}\\
 	\begin{enumerate}
-		\item We can efficiently delegate (subsets of) \textit{feasible} computations to a rational server.\pause
-		\item If a server ``cares'' about \textit{costs of computation}, existing techniques won't work when delegating multiple times; \pause I describe techniques without this flaw.\pause
-		\item As an alternative approach to solve (2), with minimal assumptions we can design protocols where \textit{cheating does cost more} than acting honestly.
+		\item We can obtain such guarantees when delegating (subsets of) \textit{feasible} computations.\pause This ``delegation'' is very efficient.\pause
+		\item If a server ``cares'' about \textit{costs of computation}, existing techniques have a limitation (no multiple delegations); \pause %I describe techniques without this flaw.\pause
+		\item Alternative approach to solve (2): add minimal complexity assumptions and obtain protocols where \textit{cheating does cost more} than acting honestly.
 	\end{enumerate}
 \end{frame}
 

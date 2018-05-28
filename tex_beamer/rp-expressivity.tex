@@ -4,15 +4,33 @@
 \section{Rational Proofs for Feasible Computation}
 
 \begin{frame}{Rational Proofs for Space-Bounded Computations}
-	content...
+\begin{block}{Theorem (informal)}
+	If $L$ can be decided in time $T$ and space $S$ by a $DTM$, then it admits a rational proof with $O(\log n)$ rounds, $S \log n$ communication complexity and Verifier's running time.
+\end{block}
+\pause
+\begin{itemize}[<+->]
+	\item \textit{Special case:} If $T=poly(n)$ and $S=polylog(n)$ then we have a $O(\log n)$ round protocol with a polylog verifier.
+	\item Generalization to randomized computation (using PRGs against space-bounded adversaries \cite{nisan1992pseudorandom}).
+	\begin{itemize}
+		\item unconditional PRGs
+		\item Possible through one of our composition result.
+	\end{itemize}
+\end{itemize}
 	% TODO: Say about generalization of result
 \end{frame}
 
 \begin{frame}{RPs for Space-Bounded Computations (intuition)}
-	content...
+\begin{itemize}
+	\item Core: interactive proof with ``low'' soundness;\pause
+	\item In the end, if prover accepts, reward $R$ otherwise reward $0$
+\end{itemize}
 \end{frame}
 
 \begin{frame}{How Efficient Can We Hope RPs for P to be?}
- Lower bounds here
+	\textbf{Our result for space-bounded (prev. slides):} For $S = \polylog(n)$ we have a polylog verifier and polylog total communication.
+	\pause
+	\begin{block}{Theorem (informal)}
+It is unlikely\footnote{Unless ``something related'' to $\NP \subseteq \BPP$ holds} there exist rational proofs for P with polylog verification and log total communication;
+\end{block}
 \end{frame}
 
