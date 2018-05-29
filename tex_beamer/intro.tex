@@ -5,7 +5,7 @@
 \begin{columns}
 	\column{0.5\textwidth}
 \begin{block}{The Context}
-	A \textit{delegator} requests a \textit{worker} to perform a computation for her.
+	A \textit{delegator} (verifier) requests a \textit{worker} (prover) to perform a computation for her.
 \end{block}
 \onslide<+->
 \begin{itemize}[<+- | alert@+>]
@@ -39,9 +39,23 @@
 
 \end{frame}
 
+
+\begin{frame}[t]{Advantages of Exploiting Rationality}
+
+Assuming a rational adversary (instead of an arbitrary one) clearly gives us a weaker model.\\\vspace{1cm}
+\pause
+\textbf{Yet, a rational model buys us:}
+\begin{itemize}
+	\item Efficient Protocols (especially verification);
+	\item Simple Protocols;
+	\item  Unconditional Results (often).
+\end{itemize}
+
+\end{frame}
+
 \begin{frame}{Is this Model a Plausible Approximation?}
 \begin{block}{Incentives in Outsourced Computation:}
-	\begin{itemize}[<+- | alert@+>]
+	\begin{itemize}
 		\item  payments for computations on the cloud; % XXX: who applies this model?
 		\item 'rewarded' volunteer computation (SETI@HOME, GridCoin);
 		\item  rewards for mining in cryptocurrencies.
@@ -51,15 +65,6 @@
 %\textbf{What are the Advantages?}
 \end{frame}
 
-\begin{frame}{Advantages of Exploiting Rationality}
-
-	\begin{itemize}[<+- | alert@+>]
-		\item Efficient Protocols (especially verification);
-		\item Simple Protocols;
-		\item  Unconditional Results (often).
-	\end{itemize}
-
-\end{frame}
 
 % Metaphor
 
@@ -70,7 +75,7 @@
 	\begin{enumerate}
 		\item We can obtain such guarantees when delegating (subsets of) \textit{feasible} computations.\pause %This ``delegation'' is very efficient.\pause
 		\item If a server ``cares'' about \textit{costs of computation}, existing techniques have a limitation (no multiple delegations); \pause I describe techniques without this flaw.\pause
-		\item Alternative approach to solve (2) through minimal complexity assumptions:\pause obtain protocols where \textit{cheating does cost more than acting honestly}.
+		\item Alternative approach to solve (2) through minimal complexity assumptions:\pause  obtain protocols where \textit{cheating does cost more than acting honestly}.
 	\end{enumerate}
 \end{frame}
 

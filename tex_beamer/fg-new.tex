@@ -56,6 +56,21 @@
 	\item Reusable (in the preprocessing model);
 	\item Supports delegation of (a subset of) $\ACzt$.
 \end{itemize}
+\pause
+\bigskip
+\hrule
+\medskip
+\begin{columns}
+	\column{0.33\textwidth}
+	$\NC^1: $ log-depth, fan-in two.\\\vspace{1cm}
+	\pause
+	\column{0.33\textwidth}
+	$\AC^0: $ constant-depth, unbounded fan-in, AND/OR/NOT gates.\\\vspace{1cm}
+	\pause
+	\column{0.33\textwidth}
+		$\ACzt: \AC^0 + $  XOR gates.\\\vspace{1cm} \pause
+		$\AC^0 \subsetneq \ACzt \subsetneq \NC^1$ 
+\end{columns}
 \end{frame}
 
 
@@ -102,9 +117,9 @@
 		\column{0.65\textwidth}
 	\procedure{Protocol from \cite{ckv10}}{%
 		\textbf{Delegator} \> \> \textbf{Worker}  \\
-		r \sample \bin^n\\
-		y^*_0 \gets f(r)\\
-		\vect{c}_0 \gets \E(r) \pclb
+		%r \sample \bin^n\\
+		\vect{c}_0 \gets \E(0) \\
+		\vect{y^*_0} \gets \func{Eval}(f, \vect{c}_0)\pclb
 		\pcintertext[dotted]{End Offline Stage}
 		\vect{c}_1 \gets \E(x)\\
 		b \sample \bin \> \> \\
@@ -112,13 +127,13 @@
 		\> \> \vect{y}_0 \gets \func{Eval}(f, \vect{c}_0)    \\
 		\> \> \vect{y}_1 \gets \func{Eval}(f, \vect{c}_1)    \\
 		\> \xleftarrow{\vect{y}_b,\vect{y}_{1-b}} \>   \\
-		\text{accept } \func{Dec}(\vect{y}_1) \text{ if } \func{Dec}(\vect{y}_0) = y^*_0 \> \>}
+		\text{accept } \func{Dec}(\vect{y}_1) \text{ if } \vect{y}_0 = \vect{y^*_0} \> \>}
 	\onslide<3->
 	\column{0.35\textwidth}
 	\textbf{Then:}
 	\begin{itemize}
 		% TODO: Improve graphics so that changes are clear
-		\item \textbf{To amplify error:} use random permutation
+		\item \textbf{To amplify error:} use random permutation;
 			\onslide<4->
 		\item \textbf{To make reusable:} use HE  on top of construction.
 	\end{itemize}
@@ -143,7 +158,7 @@
 
 % == HE against NC1 circuits==
 \begin{frame}[t]{Obtaining HE Secure Against $\NC^1$ Adversaries}
-\begin{block}{Recall Our Additional Result}
+\begin{block}{Recall Our Additional Result:}
 	HE against secure against $\NC^1$ adversaries under $\L \not = \NC^1$ supporting evaluation of (a subset of) $\ACzt$.
 \end{block}
 \pause
