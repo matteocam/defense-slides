@@ -1,6 +1,6 @@
 \section{On the Cost of Computation and Using Rational Proofs Multiple Times}
 
-\begin{frame}{Computation has a Price: Accounting for Costs}
+\begin{frame}{Computation Has a Price: Accounting for Costs}
 	\begin{columns}
 	\column{0.60\textwidth}
 	\begin{block}{So far:}
@@ -25,8 +25,8 @@
 \begin{block}{How to achieve (2) given (1)?}
 \end{block}
 		\onslide<6->
-	\begin{block}{Solution: scale reward appropriately}
-		If (1) holds then scaling the reward function by a linear function of $C$ is sufficient to obtain (2).
+	\begin{block}{Solution: scale reward appropriately.}
+		If (1) holds, then scaling the reward function by a linear function of $C$ is sufficient to obtain (2).
 	\end{block}
 %[Say we can scale reward appropriately and this works for one-time]
 % Say about individual rationality here
@@ -53,12 +53,11 @@
 \end{columns}
 %%%
 \onslide<3->
-\large{\textbf{On multiple inputs $x_1, x_2, x_3$:}}
-\begin{block}{The prover $\disP$ \underline{profits} more than $P$:}
+\large{\textbf{Possible Issue: On multiple inputs $x_1, x_2, x_3$ such prover $\disP$ \underline{profits} more than $P$ on $x$:}}
+
 	\begin{figure}
 		\includegraphics[scale=0.18]{pics/dishonest-rew-many.png}
 	\end{figure}
-\end{block}
 
 \end{frame}
 
@@ -159,7 +158,8 @@ There exist sequentially composable rational proofs for ``regular'' arithmetic c
 	\begin{enumerate}
 		\item Reward depends on ``checks'' (although with low soundness);\pause
 		\begin{itemize}
-			\item Different than other approaches where reward depends on \textit{scoring rules}.
+			\item Thus, the less the work of the prover the higher the probability of catching him.\pause
+			\item Different than earlier approaches where reward depends on \textit{scoring rules}.
 		\end{itemize}\pause
 		\item Assumptions on costs.
 	\end{enumerate}

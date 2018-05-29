@@ -5,36 +5,43 @@
 
 \begin{frame}{Rational Proofs for Space-Bounded Computations}
 \begin{block}{Theorem (informal)}
-	If $L$ can be decided in time $T$ and space $S$ by a $DTM$, then it admits a rational proof with $O(\log n)$ rounds, $S \log n$ communication complexity and Verifier's running time.
+	Let $L$ be decidable in time $T$ and space $S$\pause, then it admits a rational proof with $O(\log n)$ rounds, $S \log n$ communication complexity and Verifier's running time.
 \end{block}
 \pause
-\begin{itemize}[<+->]
+\begin{itemize}
 	\item \textit{Special case:} If $T=poly(n)$ and $S=polylog(n)$ then we have a $O(\log n)$ round protocol with a polylog verifier.
-	\item Generalization to randomized computation (using PRGs against space-bounded adversaries \cite{nisan1992pseudorandom}).
-	\begin{itemize}
-		\item unconditional PRGs
-		\item Possible through one of our composition result.
-	\end{itemize}
 \end{itemize}
+\pause
+\bigskip
+\begin{block}{Extensions}
+	 Generalizable to randomized computation (using PRGs against space-bounded adversaries \cite{nisan1992pseudorandom}).
+	 \pause
+\begin{itemize}[<+->]
+	\item Unconditional PRGs
+	\item Possible through our  result on composition of rational proofs.
+\end{itemize}
+\end{block}
 	% TODO: Say about generalization of result
 \end{frame}
 
 \begin{frame}{RPs for Space-Bounded Computations (intuition)}
 \begin{itemize}
 	\item Core: interactive proof with ``low'' soundness;\pause
-	\item In the end, if verifier accepts, reward $R$ otherwise reward $0$
+	\item In the end, if verifier accepts, reward $R$ otherwise reward $0$\pause
+	\item A cheating prover suffers a polynomially large loss.
 \end{itemize}
 \medskip
 \begin{figure}
 	\pause
 	\includegraphics[scale=0.3]{pics/space-protocol.png}
-	\caption{Configuration Graph of a deterministic computation}
+	\caption{Configuration Graph of a Deterministic  Computation}
 \end{figure}
 \end{frame}
 
 \begin{frame}{How Efficient Can We Hope RPs for P to be?}
 	\textbf{Our result for space-bounded (prev. slides):} For $S = \polylog(n)$ we have a polylog verifier and polylog total communication.
 	\pause
+	\bigskip
 	\begin{block}{Theorem (informal)}
 It is unlikely\footnote{Unless ``something related'' to $\NP \subseteq \BPP$ holds} there exist rational proofs for P with polylog verification and log total communication;
 \end{block}

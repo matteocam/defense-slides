@@ -6,12 +6,15 @@
 			%\item A framework for multiple delegations (sequential composability);
 			\item (Sequentially composable) protocols for $\log$-depth arithmetic circuits and space-bounded computations.
 			\item VC and HE against $\NC^1$ adversaries and computable in low-depth.
+			\begin{itemize}
+				\item Under minimal assumptions.
+			\end{itemize}
 		\end{itemize}
 \end{frame}
 
 \begin{frame}{Related Work (Results on Rational Proofs)}
 \begin{itemize}[<+- | alert@+>]
-	\item First rational proofs for space-bounded computation
+	\item First rational proof for space-bounded computation
 	\item $\cite{ratsumchecks}$ achieves constant-round \textit{rational arguments} for $\P$ (with cryptographic assumptions)
 	\begin{itemize}
 		\item Our results hold unconditionally.
@@ -26,7 +29,7 @@
 
 
 \begin{frame}{Related Work (Results on Fine-Grained Protocols)}
-	Comparison with information-theoretic works:
+	Comparison with information-theoretic results:
 	\begin{itemize}[<+- | alert@+>]
 		\item ``Proofs for Muggles'' \cite{muggles} obtains constant-round protocols for $\NC^1$.
 		\begin{itemize}
@@ -34,7 +37,10 @@
 			\item our verifier runs in $\ACzt$; theirs in $\TC^0$;
 			\item our protocol is I/O private and non-interactive.
 		\end{itemize}
-		\item \cite{gghkr07} obtains constant-round protocols for $\NC^1$.
+		\item \cite{gghkr07} obtains constant-depth ($\NC^0$) protocols for $\NC^1$.
+		\begin{itemize}
+			\item large verifier ($n^3$) and communication overhead.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
