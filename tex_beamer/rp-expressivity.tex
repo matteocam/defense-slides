@@ -47,3 +47,18 @@ It is unlikely\footnote{Unless ``something related'' to $\NP \subseteq \BPP$ hol
 \end{block}
 \end{frame}
 
+\begin{frame}{Comparison with Prior Work}
+\large{Comparing our rational proof for space-bounded computation:}\pause
+	\begin{itemize}[<+- | alert@+>]
+		\item $\cite{ratsumchecks}$ achieves constant-round \textit{rational arguments} for $\P$ (with cryptographic assumptions);
+		\begin{itemize}
+			\item Our results hold unconditionally;
+		\end{itemize}
+		\item \cite{rrr16} achieves constant-round interactive proofs for space-bounded computation;
+		\begin{itemize}
+			\item \cite{rrr16} has better round complexity;
+			\item We fare better in terms of communication (us: polylog, \cite{rrr16}:$\poly(S(n)n^{\delta})$ and verification (us: sublinear, \cite{rrr16}: $\poly(S((n)) + n$).
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+

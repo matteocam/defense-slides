@@ -174,3 +174,19 @@
 	\end{enumerate}%\pause
 	%\textbf{Next, we see 1 and 2.}
 \end{frame}
+
+\begin{frame}{Comparison with Prior Work}
+	Comparison with information-theoretic results:
+	\begin{itemize}[<+- | alert@+>]
+		\item ``Proofs for Muggles'' \cite{muggles} obtains constant-round protocols for $\NC^1$.
+		\begin{itemize}
+			\item results in \cite{muggles} hold unconditionally; 
+			\item our verifier runs in $\ACzt$; theirs in $\TC^0$;
+			\item our protocol is I/O private and non-interactive.
+		\end{itemize}
+		\item \cite{gghkr07} obtains constant-depth ($\NC^0$) protocols for $\NC^1$.
+		\begin{itemize}
+			\item large verifier ($n^3$) and communication overhead.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
